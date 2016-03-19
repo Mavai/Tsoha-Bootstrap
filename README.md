@@ -2,7 +2,7 @@
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](http://markovai.users.cs.helsinki.fi/tsohaprojekti/
+* [Linkki sovellukseeni](http://markovai.users.cs.helsinki.fi/tsohaprojekti/)
 * [Linkki dokumentaatiooni](https://github.com/Mavai/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
