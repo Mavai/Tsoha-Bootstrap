@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>Tietojenkäsittelytieteen harjoitustyöt</h1>
+  
+  <table class="table table-striped table-bordered">
+      <thead>
+          <tr>
+              <th>Aihe</th>
+              <th>Vaikeusaste</th>
+              <th>Maksimiarvosana</th>
+              <th>Suorituskerrat</th>
+              <th>Keskimääräinen arvosana</th>
+          </tr>
+      </thead>
+      
+      <tbody>
+          <tr>
+              <td><a href="{{base_path}}/aihe">Miinaharava</a></td>
+              <td>Helppo</td>
+              <td>5</td>
+              <td>1</td>
+              <td>4</td>
+          </tr>
+          <tr>
+              <td><a href="#">Laskin</a></td>
+              <td>Helppo</td>
+              <td>5</td>
+              <td>1</td>
+              <td>4</td>
+          </tr>
+      </tbody>
+  </table>
+  
+  <a href="{{base_path}}/aihe_lisays" class="btn btn-primary">Lisää aihe</a>
+  
+
+{% endblock %}
