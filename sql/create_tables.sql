@@ -20,7 +20,7 @@ CREATE TABLE Subject(
     difficulty varchar(50),
     maxgrade INTEGER,
     description varchar(500), 
-    course_id INTEGER REFERENCES Kurssi(id)
+    course_id INTEGER REFERENCES Course(id)
 );
 
 CREATE TABLE Assignment(

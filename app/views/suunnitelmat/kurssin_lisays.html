@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h1>Kurssin lisäys</h1>
+  <h1>Aiheen lisäys</h1>
   
-  <form class="col-xs-5">
+  <form class="col-xs-5" method="post" action="{{base_path}}/aiheet">
       <div class="form-group">
           <label>Nimi</label>
-          <input  type="text" class="form-control" value="">
+          <input name="name" type="text" class="form-control" value="">
       </div>
       <div class="form-group">
-          <button class="btn btn-primary">Lisää</button>
+          <label>Vaikeusaste</label>
+          <input name="difficulty" type="text" class="form-control" value="">
+      </div>
+      <div class="form-group">
+          <label>Arvosanamaksimi</label>
+          <input name="maxgrade" type="number" class="form-control" value="">
+      </div>
+      <div class="form-group">
+          <label>Kuvaus</label>
+          <textarea name="description" class="form-control">
+          </textarea>
+      </div>
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary">Lisää</button>
       </div>
   </form>
 

@@ -13,15 +13,11 @@
   });
   
   $routes->get('/kurssit', function () {
-      HelloWorldController::kurssit(); 
+      CourseController::index();
   });
   
-  $routes->get('/aiheet', function () {
-      SubjectController::index(); 
-  });
-  
-  $routes->get('/aihe', function () {
-      HelloWorldController::aiheInfo(); 
+  $routes->get('/aihe/:id', function ($id) {
+      SubjectController::show($id);
   });
   
   $routes->get('/aihe_muokkaus', function () {
@@ -34,4 +30,16 @@
   
   $routes->get('/aihe_lisays', function () {
       HelloWorldController::aiheenLisays(); 
+  });
+  
+  $routes->get('/aiheet/:id', function ($id) {
+      SubjectController::index($id); 
+  });
+  
+  $routes->post('/aiheet', function() {
+      SubjectController::store();
+  });
+  
+  $routes->get('/aiheet/new', function() {
+      SubjectController::create();
   });
