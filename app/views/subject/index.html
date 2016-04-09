@@ -13,22 +13,16 @@
               <th>Keskimääräinen arvosana</th>
           </tr>
       </thead>
-      
       <tbody>
+          {% for aihe in aiheet %}
           <tr>
-              <td><a href="{{base_path}}/aihe">Miinaharava</a></td>
-              <td>Helppo</td>
-              <td>5</td>
-              <td>1</td>
-              <td>4</td>
+              <td><a href="{{base_path}}/aihe/{{aihe.id}}">{{aihe.name}}</a></td>
+              <td>{{aihe.difficulty}}</td>
+              <td>{{aihe.maxgrade}}</td>
+              <td></td>
+              <td></td>
           </tr>
-          <tr>
-              <td><a href="#">Laskin</a></td>
-              <td>Helppo</td>
-              <td>5</td>
-              <td>1</td>
-              <td>4</td>
-          </tr>
+          {% endfor %}
       </tbody>
   </table>
   

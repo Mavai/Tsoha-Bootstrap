@@ -1,34 +1,35 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
-CREATE TABLE Kurssi(
+CREATE TABLE Course(
     id SERIAL PRIMARY KEY,
-    nimi varchar(50)
+    name varchar(50)
 );
 
-CREATE TABLE Opettaja(
+CREATE TABLE Teacher(
     id SERIAL PRIMARY KEY,
-    nimi varchar(50)
+    name varchar(50)
 );
 
-CREATE TABLE Opiskelija(
-    opiskelijanumero NUMERIC PRIMARY KEY,
-    nimi varchar(50)
+CREATE TABLE Student(
+    studentnumber BIGINT PRIMARY KEY,
+    name varchar(50)
 );
 
-CREATE TABLE Aihe(
+CREATE TABLE Subject(
     id SERIAL PRIMARY KEY,
-    nimi varchar(50),
-    vaikeusaste varchar(50),
-    maksimiarvosana INTEGER,
-    kuvaus varchar(500)
+    name varchar(50),
+    difficulty varchar(50),
+    maxgrade INTEGER,
+    description varchar(500), 
+    course_id INTEGER REFERENCES Kurssi(id)
 );
 
-CREATE TABLE Harjoitustyö(
+CREATE TABLE Assignment(
     id SERIAL PRIMARY KEY,
-    alkamispvm DATE,
-    päättymispvm DATE,
-    arvosana INTEGER,
-    kurssi INTEGER REFERENCES Kurssi(id),
-    opettaja INTEGER REFERENCES Opettaja(id),
-    opiskelija INTEGER REFERENCES Opiskelija(opiskelijanumero),
-    aihe INTEGER REFERENCES Aihe(id)
+    begindate DATE,
+    enddate DATE,
+    grade INTEGER,
+    course_id INTEGER REFERENCES Course(id),
+    teacher_id INTEGER REFERENCES Teacher(id),
+    student_id INTEGER REFERENCES Student(studentnumber),
+    subject_id INTEGER REFERENCES Subject(id)
 );

@@ -17,7 +17,7 @@
   });
   
   $routes->get('/aiheet', function () {
-      HelloWorldController::aiheet(); 
+      SubjectController::index(); 
   });
   
   $routes->get('/aihe', function () {

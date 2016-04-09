@@ -1,13 +1,13 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
 
-INSERT INTO Kurssi (nimi) VALUES ('Ohjelmoinnin harjoitustyö');
+INSERT INTO Course (name) VALUES ('Ohjelmoinnin harjoitustyö');
 
-INSERT INTO Opettaja (nimi) VALUES ('Matti Meikäläinen');
+INSERT INTO Teacher (name) VALUES ('Matti Meikäläinen');
 
-INSERT INTO Opiskelija (opiskelijanumero, nimi) VALUES (0123456789, 'Marko Vainio');
+INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Marko Vainio');
 
-INSERT INTO Aihe (nimi, vaikeusaste, maksimiarvosana, kuvaus) VALUES 
-            ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli');
+INSERT INTO Subject (name, difficulty, maxgrade, description, course_id) VALUES 
+            ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli', 1);
 
-INSERT INTO Harjoitustyö (alkamispvm, päättymispvm, arvosana) VALUES 
+INSERT INTO Assignment (begindate, enddate, grade) VALUES 
             ('2016-01-01', '2016-03-04', 5)
