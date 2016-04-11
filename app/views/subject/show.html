@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <h1>{{subject.name}}</h1>
+  
+  <ul>
+      <li><strong>Vaikeusaste: </strong>{{subject.difficulty}}</li>
+      <li><strong>Arvosanamaksimi: </strong>{{subject.maxgrade}}</li>
+      <li><strong>Valintakerrat: </strong>1</li>
+      <li><strong>Keskeytykset: </strong>0</li>
+      <li><strong>Suoritusprosentti: </strong>100%</li>
+      <li><strong>Keskimääräinen arvosana: </strong>4</li>
+      <li><strong>Viimeksi valittu: </strong>1.1.2016</li>
+  </ul>
+  
+  <p>
+      {{subject.description}}
+  </p>
+  
+  <p>
+      <a href="{{base_path}}/aihe_muokkaus" class="btn btn-default">Muokkaa</a>
+      <a href="#" class="btn btn-danger">Poista</a>
+  </p>
+
+{% endblock %}
