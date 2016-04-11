@@ -26,7 +26,7 @@ class SubjectController extends BaseController {
         
         $subject->save();
         
-        //Redirect::to('/aiheet');
+        Redirect::to('/aiheet');
     }
     
     public static function create() {
