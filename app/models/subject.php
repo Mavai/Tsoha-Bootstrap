@@ -2,10 +2,11 @@
 
 class Subject extends BaseModel {
 
-    public $id, $name, $difficulty, $maxgrade, $description, $course_id;
+    public $id, $name, $difficulty, $maxgrade, $description, $course_id, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_maxgrade');
     }
 
     public static function findAll() {
@@ -48,7 +49,7 @@ class Subject extends BaseModel {
         return null;
     }
     
-    public function findAllIn($courseId) {
+    public static function findAllIn($courseId) {
         $query = DB::connection()->prepare('SELECT * FROM Subject WHERE course_id = :id');
         $query->execute(array('id' => $courseId));
         $rows = $query->fetchAll();
@@ -69,15 +70,30 @@ class Subject extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description) '
-                . 'VALUES (:name, :difficulty, :maxgrade, :description) RETURNING id');
-        
+        $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description, course_id) '
+                . 'VALUES (:name, :difficulty, :maxgrade, :description, :course_id) RETURNING id');
         $query->execute(array('name' => $this->name, 'difficulty' => $this->difficulty, 'maxgrade' => $this->maxgrade, 
-            'description' => $this->description));
+            'description' => $this->description, 'course_id' => $this->course_id));
         
         $row = $query->fetch();
         
         $this->id = $row['id'];
+    }
+    
+    public function validate_name() {
+        $errors = array();
+        if ($this->name == '' || $this->name == NULL) {
+            $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        return $errors;
+    }
+    
+    public function validate_maxgrade() {
+        $errors = array();
+        if ($this->maxgrade == '' || $this->maxgrade == NULL) {
+            $errors[] = 'Anna arvosanamaksimi';
+        }
+        return $errors;
     }
 
 }

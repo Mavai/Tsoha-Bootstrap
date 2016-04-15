@@ -2,7 +2,7 @@
 
 class Course extends BaseModel {
     
-    public $id, $name;
+    public $id, $name, $subjectCount;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -17,7 +17,7 @@ class Course extends BaseModel {
         $courses = array();
 
         foreach ($rows as $row) {
-            $courses[] = new Subject(array(
+            $courses[] = new Course(array(
                 'id' => $row['id'],
                 'name' => $row['name']
             ));
@@ -31,7 +31,7 @@ class Course extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $course = new Subject(array(
+            $course = new Course(array(
                 'id' => $row['id'],
                 'name' => $row['name']
             ));
@@ -49,6 +49,8 @@ class Course extends BaseModel {
         
         $this->id = $row['id'];
     }
+    
+    
     
     
 }

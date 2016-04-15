@@ -36,10 +36,10 @@
       SubjectController::index($id); 
   });
   
-  $routes->post('/aiheet', function() {
-      SubjectController::store();
+  $routes->post('/aiheet/:id', function($id) {
+      SubjectController::store($id);
   });
   
-  $routes->get('/aiheet/new', function() {
-      SubjectController::create();
+  $routes->get('/aiheet/:id/new', function($id) {
+      SubjectController::create($id);
   });

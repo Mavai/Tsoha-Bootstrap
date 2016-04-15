@@ -8,11 +8,14 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $miinaharava = Subject::findId(1);
-        $aiheet = Subject::findAll();
-        
-        Kint::dump($aiheet);
-        Kint::dump($miinaharava);
+        $asd = new Subject(array(
+            'name' => '',
+            'difficulty' => 'Helppo',
+            'maxgrade' => '',
+            'description' => 'asdasd',
+        ));
+        $errors = $asd->errors();
+        Kint::dump($errors);
         View::make('helloworld.html');
     }
 
