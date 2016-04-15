@@ -20,7 +20,12 @@
       </div>
       <div class="form-group">
           <label>Vaikeusaste</label>
-          <input name="difficulty" type="text" class="form-control" value="{{attributes.difficulty}}">
+          <select name="difficulty" class="selectpicker">
+              <option selected="selected">{{attributes.difficulty}}</option>
+              <option>Helppo</option>
+              <option>Keskitasoa</option>
+              <option>Vaikea</option>
+          </select>
       </div>
       <div class="form-group">
           <label>Arvosanamaksimi</label>
