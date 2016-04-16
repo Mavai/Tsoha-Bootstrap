@@ -36,10 +36,22 @@
       SubjectController::index($id); 
   });
   
-  $routes->post('/aiheet/:id', function($id) {
+  $routes->post('/aiheet/:id/new', function($id) {
       SubjectController::store($id);
   });
   
   $routes->get('/aiheet/:id/new', function($id) {
       SubjectController::create($id);
+  });
+  
+  $routes->get('/aihe/:id/edit', function($id) {
+      SubjectController::edit($id);
+  });
+  
+  $routes->post('/aihe/:id/edit', function($id) {
+      SubjectController::update($id);
+  });
+  
+  $routes->post('/aihe/:id/destroy', function($id) {
+      SubjectController::destroy($id);
   });

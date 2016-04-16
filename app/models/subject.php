@@ -72,14 +72,31 @@ class Subject extends BaseModel {
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description, course_id) '
                 . 'VALUES (:name, :difficulty, :maxgrade, :description, :course_id) RETURNING id');
-        $query->execute(array('name' => $this->name, 'difficulty' => $this->difficulty, 'maxgrade' => $this->maxgrade, 
-            'description' => $this->description, 'course_id' => $this->course_id));
+        $query->execute(array(':name' => $this->name, ':difficulty' => $this->difficulty, ':maxgrade' => $this->maxgrade, 
+            ':description' => $this->description, ':course_id' => $this->course_id));
         
         $row = $query->fetch();
         
         $this->id = $row['id'];
     }
     
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Subject SET name = :name, difficulty = :difficulty, maxgrade = :maxgrade, description = :description WHERE id = :id2');
+        $query->bindValue(':name', $this->name);
+        $query->bindValue(':difficulty', $this->difficulty);
+        $query->bindValue(':maxgrade', $this->maxgrade);
+        $query->bindValue(':description', $this->description);
+        $query->bindValue(':id2', $this->id);
+        $query->execute();
+        
+        $row = $query->fetch();
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Subject WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
     public function validate_name() {
         $errors = array();
         if ($this->name == '' || $this->name == NULL) {
