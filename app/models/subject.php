@@ -2,7 +2,7 @@
 
 class Subject extends BaseModel {
 
-    public $id, $name, $difficulty, $maxgrade, $description, $course_id, $validators;
+    public $id, $name, $difficulty, $maxgrade, $description, $course_id, $added, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -10,7 +10,7 @@ class Subject extends BaseModel {
     }
 
     public static function findAll() {
-        $query = DB::connection()->prepare('SELECT * FROM Subject');
+        $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject ORDER BY added');
 
         $query->execute();
 
@@ -24,14 +24,15 @@ class Subject extends BaseModel {
                 'difficulty' => $row['difficulty'],
                 'maxgrade' => $row['maxgrade'],
                 'description' => $row['description'],
-                'course_id' => $row['course_id']
+                'course_id' => $row['course_id'],
+                'added' => $row['to_char']
             ));
         }
         return $subjects;
     }
 
     public static function findId($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Subject WHERE id = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
@@ -42,7 +43,8 @@ class Subject extends BaseModel {
                 'difficulty' => $row['difficulty'],
                 'maxgrade' => $row['maxgrade'],
                 'description' => $row['description'],
-                'course_id' => $row['course_id']
+                'course_id' => $row['course_id'],
+                'added' => $row['to_char']
             ));
             return $subject;
         }
@@ -50,7 +52,7 @@ class Subject extends BaseModel {
     }
     
     public static function findAllIn($courseId) {
-        $query = DB::connection()->prepare('SELECT * FROM Subject WHERE course_id = :id');
+        $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject  WHERE course_id = :id ORDER BY added');
         $query->execute(array('id' => $courseId));
         $rows = $query->fetchAll();
         
@@ -63,17 +65,18 @@ class Subject extends BaseModel {
                 'difficulty' => $row['difficulty'],
                 'maxgrade' => $row['maxgrade'],
                 'description' => $row['description'],
-                'course_id' => $row['course_id']
+                'course_id' => $row['course_id'],
+                'added' => $row['to_char']
             ));
         }
         return $subjects;
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description, course_id) '
-                . 'VALUES (:name, :difficulty, :maxgrade, :description, :course_id) RETURNING id');
+        $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description, course_id, added) '
+                . 'VALUES (:name, :difficulty, :maxgrade, :description, :course_id, :added) RETURNING id');
         $query->execute(array(':name' => $this->name, ':difficulty' => $this->difficulty, ':maxgrade' => $this->maxgrade, 
-            ':description' => $this->description, ':course_id' => $this->course_id));
+            ':description' => $this->description, ':course_id' => $this->course_id, ':added' => date('d.m.Y')));
         
         $row = $query->fetch();
         

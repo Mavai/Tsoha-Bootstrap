@@ -1,5 +1,7 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 {% block content %}
+
 
 {% if message %}
 <div class="alert alert-success">
@@ -16,6 +18,7 @@
     <li><strong>Keskeytykset: </strong>0</li>
     <li><strong>Suoritusprosentti: </strong>100%</li>
     <li><strong>Keskimääräinen arvosana: </strong>4</li>
+    <li><strong>Lisätty: </strong>{{subject.added}}</li>
     <li><strong>Viimeksi valittu: </strong>1.1.2016</li>
 </ul>
 
@@ -23,11 +26,9 @@
     {{subject.description}}
 </p>
 
-<p>
+<div>
     <a href="{{base_path}}/aihe/{{subject.id}}/edit" class="btn btn-default">Muokkaa</a>
-<form method="post" action="{{base_path}}/aihe/{{subject.id}}/destroy" style="display: inline-block;">
-    <button type="submit" class="btn btn-danger">Poista</button>
-</form>
-</p>
+    {{forms.destroy_button("#{base_path}/aihe/#{subject.id}/edit")}}
+</div>
 
 {% endblock %}

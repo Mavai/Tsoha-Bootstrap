@@ -19,7 +19,8 @@ CREATE TABLE Subject(
     name varchar(50),
     difficulty varchar(50),
     maxgrade INTEGER,
-    description varchar(500), 
+    description varchar(500),
+    added DATE,
     course_id INTEGER REFERENCES Course(id)
 );
 

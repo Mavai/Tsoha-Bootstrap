@@ -30,7 +30,7 @@ class SubjectController extends BaseController {
 
         if (count($errors) == 0) {
             $subject->save();
-            Redirect::to('/aihe/' . $subject->id);
+            Redirect::to('/aihe/' . $subject->id, array('message' => 'Aihe lisätty onnistuneesti.'));
         } else {
             $course = Course::findId($id);
             View::make('subject/new.html', array('course' => $course, 'errors' => $errors, 'attributes' => $attributes));
@@ -72,10 +72,11 @@ class SubjectController extends BaseController {
     
     public static function destroy($id) {
         $course_id = Subject::findId($id)->course_id;
+        $name = Subject::findId($id)->name;
         $subject = new Subject(array('id' => $id));
         $subject->destroy();
         
-        Redirect::to('/aiheet/' . $course_id);
+        Redirect::to('/aiheet/' . $course_id, array('message' => $name . ' poistettiin onnistuneesti.'));
     }
 
 }

@@ -10,8 +10,8 @@ INSERT INTO Teacher (name) VALUES ('Matti Meikäläinen');
 
 INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Marko Vainio');
 
-INSERT INTO Subject (name, difficulty, maxgrade, description, course_id) VALUES 
-            ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli', 1);
+INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
+            ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli', '1.1.2016', 1);
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, course_id) VALUES 
             ('Työaihekanta', 'Keskitasoa', 5, 'Harjoitustöiden aihekanta', 2);
