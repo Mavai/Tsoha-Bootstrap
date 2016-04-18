@@ -32,7 +32,8 @@
       </tbody>
   </table>
   
+  {% if user_logged_in %}
   <a href="{{base_path}}/aiheet/{{course.id}}/new" class="btn btn-primary">Lisää aihe</a>
-  
+  {% endif %}
 
 {% endblock %}
