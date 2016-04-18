@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
   <h1>Tervetuloa työaihekantaan</h1>
 
   <p class="lead">Täältä löydät kurssikohtaisesti tietoa mahdollisista harjoitustyön aiheista.</p>

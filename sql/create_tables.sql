@@ -6,7 +6,8 @@ CREATE TABLE Course(
 
 CREATE TABLE Teacher(
     id SERIAL PRIMARY KEY,
-    name varchar(50)
+    name varchar(50),
+    password varchar(50)
 );
 
 CREATE TABLE Student(
@@ -19,7 +20,8 @@ CREATE TABLE Subject(
     name varchar(50),
     difficulty varchar(50),
     maxgrade INTEGER,
-    description varchar(500), 
+    description varchar(500),
+    added DATE,
     course_id INTEGER REFERENCES Course(id)
 );
 

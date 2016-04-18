@@ -10,6 +10,11 @@
   <h1>Tekstikentät</h1>
   <input type="text" placeholder="Tavallinen tekstikenttä">
   <input type="text" class="form-control" placeholder="Bootstrap tekstikenttä">
+  
+  {% for subject in all %}
+  <p>{{subject.name}}</p>
+  <p>{{subject.course.name}}</p>
+  {% endfor %}
 
   <h1>Taulukot</h1>
   <table>
