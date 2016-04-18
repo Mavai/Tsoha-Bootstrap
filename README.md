@@ -3,13 +3,12 @@
 ## Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://markovai.users.cs.helsinki.fi/tsohaprojekti/)
-* [Linkki dokumentaatiooni](https://github.com/Mavai/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)  
-
-* [Etusivu](http://markovai.users.cs.helsinki.fi/tsohaprojekti/etusivu)  
-* [Kurssien listaus](http://markovai.users.cs.helsinki.fi/tsohaprojekti/kurssit)  
+* [Linkki dokumentaatiooni](https://github.com/Mavai/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
+* [Etusivu](http://markovai.users.cs.helsinki.fi/tsohaprojekti/etusivu)
+* [Kurssien listaus](http://markovai.users.cs.helsinki.fi/tsohaprojekti/kurssit)
 * [Kurssin aiheiden listaus](http://markovai.users.cs.helsinki.fi/tsohaprojekti/aiheet)
-* [Aiheen yhteenveto] (http://markovai.users.cs.helsinki.fi/tsohaprojekti/aihe/1)  
-* [Aiheen muokkaus](http://markovai.users.cs.helsinki.fi/tsohaprojekti/aihe_muokkaus)  
+* [Aiheen yhteenveto] (http://markovai.users.cs.helsinki.fi/tsohaprojekti/aihe/1)
+* [Aiheen muokkaus](http://markovai.users.cs.helsinki.fi/tsohaprojekti/aihe_muokkaus)
 
 ## Työn aihe
 
