@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if error %}
+<div class="alert alert-danger">
+    {{error}}
+</div>
+{% endif %}
+
+<div class="wrapper">
+    <form class="form-signin" method="post" action="{{base_path}}/login">
+        <h2 class="form-signin-heading">Kirjaudu sisään</h2>
+        <label class="">Nimi</label>
+        <input type="text" class="form-control" name="username" value="{{username}}">
+        <br>
+        <label class="">Salasana</label>
+        <input type="password" class="form-control" name="password">
+
+        <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
+    </form>
+</div>
+
+{% endblock %}
