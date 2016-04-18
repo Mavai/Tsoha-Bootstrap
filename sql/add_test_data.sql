@@ -6,7 +6,7 @@ INSERT INTO Course (name) VALUES ('Tietokantasovellus');
 
 INSERT INTO Course (name) VALUES ('Tietorakenteet ja algoritmit');
 
-INSERT INTO Teacher (name) VALUES ('Matti Meikäläinen');
+INSERT INTO Teacher (name, password) VALUES ('Matti Meikäläinen', 'aaaaa');
 
 INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Marko Vainio');
 

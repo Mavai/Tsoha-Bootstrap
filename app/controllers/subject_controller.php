@@ -23,7 +23,8 @@ class SubjectController extends BaseController {
             'difficulty' => $params['difficulty'],
             'maxgrade' => $params['maxgrade'],
             'description' => $params['description'],
-            'course_id' => $id
+            'course_id' => $id,
+            'course' => Course::findId($id)
         );
         $subject = new Subject($attributes);
         $errors = $subject->errors();
@@ -71,7 +72,7 @@ class SubjectController extends BaseController {
     }
     
     public static function destroy($id) {
-        $course_id = Subject::findId($id)->course_id;
+        $course_id = Subject::findId($id)->course->id;
         $name = Subject::findId($id)->name;
         $subject = new Subject(array('id' => $id));
         $subject->destroy();

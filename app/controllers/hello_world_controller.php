@@ -8,15 +8,9 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $asd = new Subject(array(
-            'name' => '',
-            'difficulty' => 'Helppo',
-            'maxgrade' => '',
-            'description' => 'asdasd',
-        ));
-        $errors = $asd->errors();
-        Kint::dump($errors);
-        View::make('helloworld.html');
+        $all = Subject::findAll();
+        Kint::dump($all);
+        View::make('helloworld.html', array('all' => $all));
     }
 
     public static function etusivu() {

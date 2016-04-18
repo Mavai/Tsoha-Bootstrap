@@ -2,7 +2,7 @@
 
 class Subject extends BaseModel {
 
-    public $id, $name, $difficulty, $maxgrade, $description, $course_id, $added, $validators;
+    public $id, $name, $difficulty, $maxgrade, $description, $course, $added, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -24,8 +24,8 @@ class Subject extends BaseModel {
                 'difficulty' => $row['difficulty'],
                 'maxgrade' => $row['maxgrade'],
                 'description' => $row['description'],
-                'course_id' => $row['course_id'],
-                'added' => $row['to_char']
+                'added' => $row['to_char'],
+                'course' => Course::findId($row['course_id'])
             ));
         }
         return $subjects;
@@ -43,8 +43,8 @@ class Subject extends BaseModel {
                 'difficulty' => $row['difficulty'],
                 'maxgrade' => $row['maxgrade'],
                 'description' => $row['description'],
-                'course_id' => $row['course_id'],
-                'added' => $row['to_char']
+                'added' => $row['to_char'],
+                'course' => Course::findId($row['course_id'])
             ));
             return $subject;
         }
@@ -65,8 +65,8 @@ class Subject extends BaseModel {
                 'difficulty' => $row['difficulty'],
                 'maxgrade' => $row['maxgrade'],
                 'description' => $row['description'],
-                'course_id' => $row['course_id'],
-                'added' => $row['to_char']
+                'added' => $row['to_char'],
+                'course' => Course::findId($row['course_id'])
             ));
         }
         return $subjects;
@@ -76,7 +76,7 @@ class Subject extends BaseModel {
         $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description, course_id, added) '
                 . 'VALUES (:name, :difficulty, :maxgrade, :description, :course_id, :added) RETURNING id');
         $query->execute(array(':name' => $this->name, ':difficulty' => $this->difficulty, ':maxgrade' => $this->maxgrade, 
-            ':description' => $this->description, ':course_id' => $this->course_id, ':added' => date('d.m.Y')));
+            ':description' => $this->description, ':course_id' => $this->course->id, ':added' => date('d.m.Y')));
         
         $row = $query->fetch();
         
