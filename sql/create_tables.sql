@@ -11,7 +11,7 @@ CREATE TABLE Teacher(
 );
 
 CREATE TABLE Student(
-    studentnumber BIGINT PRIMARY KEY,
+    studentnumber NUMERIC PRIMARY KEY,
     name varchar(50)
 );
 

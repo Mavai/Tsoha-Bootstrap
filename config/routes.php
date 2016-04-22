@@ -63,3 +63,7 @@ $routes->get('/login', function() {
 $routes->post('/login', function() {
     UserController::handle_login();
 });
+
+$routes->post('/logout', function() {
+    UserController::logout();
+});

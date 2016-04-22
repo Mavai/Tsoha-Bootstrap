@@ -48,7 +48,11 @@
             <li><a href="/tsohaprojekti/kurssit">Kurssit</a></li>
             
           </ul>
-            {% if not user_logged_in %}
+            {% if user_logged_in %}
+            <form class="navbar-form navbar-right" method="post" action="{{base_path}}/logout">
+                <button type="submit" class="btn btn-danger">Kirjaudu ulos </button>
+            </form>
+            {% else %}
             <ul class="nav navbar-nav navbar-right">
                 <li><p class="navbar-btn"><a href="{{base_path}}/login" class="btn btn-primary">Opettajien kirjautuminen</a></p></li>
                 <li><p class="navbar-btn"><a class="btn btn-default">Opettajien rekisteröityminen</a></p></li>
