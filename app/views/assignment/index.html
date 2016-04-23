@@ -1,0 +1,40 @@
+{% block content %}
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">Suoritukset</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Oppilas</th>
+                            <th>Opiskelijanumero</th>
+                            <th>Aloituspvm</th>
+                            <th>Lopetuspvm</th>
+                            <th>Arvosana</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        {% for assignment in assignments %}
+                        <tr>
+                            <td>{{assignment.student.name}}</td>
+                            <td>0{{assignment.student.studentnumber}}</td>
+                            <td>{{assignment.begindate}}</td>
+                            <td>{{assignment.enddate}}</td>
+                            <td>{{assignment.grade}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div class="col-md-12 text-center">
+                    <ul class="pagination pagination-lg pager" id="myPager"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

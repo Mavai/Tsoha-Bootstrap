@@ -1,12 +1,15 @@
+
 {% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
+
 {% block content %}
 
 <div>
     <a href="{{base_path}}/aiheet/{{subject.course.id}}" class="btn btn-primary btn-arrow-left">Takaisin aiheisiin</a>
 </div>
-<br>
+
 {% if message %}
+<br>
 <div class="alert alert-success">
     {{message}}
 </div>
@@ -33,6 +36,14 @@
 <div>
     <a href="{{base_path}}/aihe/{{subject.id}}/edit" class="btn btn-default">Muokkaa</a>
     {{forms.destroy_button("#{base_path}/aihe/#{subject.id}/destroy")}}
+</div>
+{% endif %}
+
+<br>
+
+{% if user_logged_in %}
+<div>
+    {% include 'assignment/index.html' %}
 </div>
 {% endif %}
 

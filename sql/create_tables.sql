@@ -29,8 +29,8 @@ CREATE TABLE Assignment(
     id SERIAL PRIMARY KEY,
     begindate DATE,
     enddate DATE,
+    status varchar(20),
     grade INTEGER,
-    course_id INTEGER REFERENCES Course(id),
     teacher_id INTEGER REFERENCES Teacher(id),
     student_id INTEGER REFERENCES Student(studentnumber),
     subject_id INTEGER REFERENCES Subject(id)
