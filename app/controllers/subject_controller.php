@@ -12,7 +12,6 @@ class SubjectController extends BaseController {
     public static function show($id) {
         $subject = Subject::findId($id);
         $assignments = Assignment::findAllIn($subject->id);
-        Kint::dump($assignments);
 
         View::make('subject/show.html', array('subject' => $subject, 'assignments' => $assignments));
     }

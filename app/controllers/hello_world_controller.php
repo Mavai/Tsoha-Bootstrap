@@ -8,7 +8,8 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        View::make('assignment/index.html');
+        $var = null;
+        View::make('helloworld.html', array('var' => $var));
     }
 
     public static function etusivu() {

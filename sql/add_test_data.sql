@@ -8,6 +8,8 @@ INSERT INTO Course (name) VALUES ('Tietorakenteet ja algoritmit');
 
 INSERT INTO Teacher (name, password) VALUES ('Matti Meikäläinen', 'aaaaa');
 
+INSERT INTO Teacher (name, password) VALUES ('Testi', 'aaaaa');
+
 INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Testi Henkilö');
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 

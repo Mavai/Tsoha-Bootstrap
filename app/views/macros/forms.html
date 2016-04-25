@@ -3,3 +3,9 @@
     <button type="submit" class="btn btn-danger">{{text|default('Poista')}}</button>
 </form>
 {% endmacro %}
+
+{% macro destroy_button_small(action) %}
+<form method="post" action="{{action}}" style="display: inline-block;">
+    <button type="submit" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+</form>
+{% endmacro %}

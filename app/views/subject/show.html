@@ -1,4 +1,3 @@
-
 {% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 
@@ -36,8 +35,11 @@
 <div>
     <a href="{{base_path}}/aihe/{{subject.id}}/edit" class="btn btn-default">Muokkaa</a>
     {{forms.destroy_button("#{base_path}/aihe/#{subject.id}/destroy")}}
+    <a href="{{base_path}}/newassignment?subjectid={{subject.id}}&userid={{user_logged_in.id}}" class="btn btn-primary pull-right">Lisää suoritus</a>
 </div>
 {% endif %}
+
+
 
 <br>
 

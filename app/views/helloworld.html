@@ -1,57 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Painikkeet</h1>
-  <button>Tavallinen painike</button>
-  <button class="btn btn-default">Bootstrap painike</button>
-  <button class="btn btn-primary">Bootstrap painike</button>
-  <button class="btn btn-success">Bootstrap painike</button>
-  <button class="btn btn-danger">Bootstrap painike</button>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
-  <h1>Tekstikentät</h1>
-  <input type="text" placeholder="Tavallinen tekstikenttä">
-  <input type="text" class="form-control" placeholder="Bootstrap tekstikenttä">
-  
-  {% for subject in all %}
-  <p>{{subject.name}}</p>
-  <p>{{subject.course.name}}</p>
-  {% endfor %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
 
-  <h1>Taulukot</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>Tavallinen</th>
-        <th>Taulukko</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Tekstiä</td>
-        <td>Tekstiä</td>
-      </tr>
-      <tr>
-        <td>Tekstiä</td>
-        <td>Tekstiä</td>
-      </tr>
-    </tbody>
-  </table>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lisää kurssi</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" method="post" action="{{base_path}}/aiheet/{{course.id}}/new">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Nimi</label>
+                            <div class="col-md-8">
+                                <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
+                            </div>
+                        <div class="form-group col-md-2">
+                            <button type="submit" class="btn btn-primary pull-right">Lisää</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
 
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Bootstrap</th>
-        <th>Taulukko</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Tekstiä</td>
-        <td>Tekstiä</td>
-      </tr>
-      <tr>
-        <td>Tekstiä</td>
-        <td>Tekstiä</td>
-      </tr>
-    </tbody>
-  </table>
+    </div>
+</div>
 {% endblock %}
+
+{% block body %}
+<script src="{{base_path}}/vendor/jquery.min.js"></script>
+
+<script src="{{base_path}}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{base_path}}/vendor/bootstrap/js/bootstrap-select.min.js"></script>
+<script src="{{base_path}}/vendor/bootstrap/js/pagination.js"></script>
+
+<script src="{{base_path}}/assets/js/site.js"></script>
+
+{% if var %}
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#myModal').modal('show');
+});
+</script>
+{% endif %}
+
+{% endblock %}
+

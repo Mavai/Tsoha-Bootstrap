@@ -1,27 +1,82 @@
+{% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
 {% block content %}
 
-  <h1>Tietojenkäsittelytieteen harjoitustyöt</h1>
-  
-  <table class="table table-striped table-bordered">
-      <thead>
-          <tr>
-              <th>Kurssi</th>
-              <th>Aiheita</th>
-          </tr>
-      </thead>
-      
-      {%for course in courses %}
-      <tbody>
-          <tr>
-              <td><a href="{{base_path}}/aiheet/{{course.id}}">{{course.name}}</a></td>
-              <td>{{counts[course.id]}}</td>
-          </tr>
-      </tbody>
-      {% endfor %}
-  </table>
-  
-  <a href="#" class="btn btn-primary">Lisää kurssi</a>
-  
+<h1>Tietojenkäsittelytieteen harjoitustyöt</h1>
 
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Kurssi</th>
+            <th>Aiheita</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    {%for course in courses %}
+    <tbody>
+        <tr>
+            <td><a href="{{base_path}}/aiheet/{{course.id}}">{{course.name}}</a></td>
+            <td>{{counts[course.id]}}</td>
+            <td>{{forms.destroy_button_small("#{base_path}/kurssi/#{course.id}/destroy")}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+
+<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Lisää kurssi</button>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Lisää kurssi</h4>
+            </div>
+            {% if errors %}
+            <div class="alert, alert-danger">
+                <ul>
+                    {% for error in errors %}
+                    <li>{{error}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+            <div class="modal-body">
+                <div>
+                    <form class="form-horizontal" method="post" action="{{base_path}}/kurssit">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Nimi</label>
+                            <div class="col-md-8">
+                                <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <button type="submit" class="btn btn-primary pull-right">Lisää</button>
+                            </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<script src="{{base_path}}/vendor/jquery.min.js"></script>
+<script src="{{base_path}}/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="{{base_path}}/vendor/bootstrap/js/bootstrap-select.min.js"></script>
+<script src="{{base_path}}/vendor/bootstrap/js/pagination.js"></script>
+<script src="{{base_path}}/assets/js/site.js"></script>
+{% if error %}
+<script type="text/javascript">
+$(window).load(function () {
+    $('#myModal').modal('show');
+});
+</script>
+{% endif %}
 {% endblock %}

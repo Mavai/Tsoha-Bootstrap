@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div>
+    <a href="{{base_path}}/kurssit" class="btn btn-primary btn-arrow-left">Takaisin kurssien listaukseen</a>
+</div>
+
 {% if message %}
 <div class="alert alert-success">
     {{message}}

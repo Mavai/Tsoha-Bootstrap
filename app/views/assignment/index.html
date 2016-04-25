@@ -11,21 +11,23 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Oppilas</th>
                             <th>Opiskelijanumero</th>
-                            <th>Aloituspvm</th>
-                            <th>Lopetuspvm</th>
+                            <th>Status</th>
                             <th>Arvosana</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody id="myTable">
                         {% for assignment in assignments %}
                         <tr>
-                            <td>{{assignment.student.name}}</td>
+                            <td>{{loop.index}}</td>
+                            <td><a href="#">{{assignment.student.name}}</a></td>
                             <td>0{{assignment.student.studentnumber}}</td>
-                            <td>{{assignment.begindate}}</td>
-                            <td>{{assignment.enddate}}</td>
+                            <td>{{assignment.status}}</td>
                             <td>{{assignment.grade}}</td>
+                            <td><a href="{{base_path}}/suoritus/{{assignment.id}}">Tietoja <span class="glyphicon glyphicon-chevron-right"></span></a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
