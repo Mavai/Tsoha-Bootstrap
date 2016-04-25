@@ -9,7 +9,9 @@
         <tr>
             <th>Kurssi</th>
             <th>Aiheita</th>
+            {% if user_logged_in %}
             <th></th>
+            {% endif %}
         </tr>
     </thead>
 
@@ -18,13 +20,17 @@
         <tr>
             <td><a href="{{base_path}}/aiheet/{{course.id}}">{{course.name}}</a></td>
             <td>{{counts[course.id]}}</td>
-            <td>{{forms.destroy_button_small("#{base_path}/kurssi/#{course.id}/destroy")}}</td>
+            {% if user_logged_in %}
+            <td class="text-center">{{forms.destroy_button_small("#{base_path}/kurssi/#{course.id}/destroy")}}</td>
+            {% endif %}
         </tr>
     </tbody>
     {% endfor %}
 </table>
 
+{% if user_logged_in %}
 <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Lisää kurssi</button>
+{% endif %}
 
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
