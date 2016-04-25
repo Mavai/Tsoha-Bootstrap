@@ -8,9 +8,8 @@ class HelloWorldController extends BaseController {
     }
 
     public static function sandbox() {
-        $all = Subject::findAll();
-        Kint::dump($all);
-        View::make('helloworld.html', array('all' => $all));
+        $var = null;
+        View::make('helloworld.html', array('var' => $var));
     }
 
     public static function etusivu() {

@@ -11,7 +11,7 @@ CREATE TABLE Teacher(
 );
 
 CREATE TABLE Student(
-    studentnumber BIGINT PRIMARY KEY,
+    studentnumber NUMERIC PRIMARY KEY,
     name varchar(50)
 );
 
@@ -22,16 +22,16 @@ CREATE TABLE Subject(
     maxgrade INTEGER,
     description varchar(500),
     added DATE,
-    course_id INTEGER REFERENCES Course(id)
+    course_id INTEGER REFERENCES Course(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Assignment(
     id SERIAL PRIMARY KEY,
     begindate DATE,
     enddate DATE,
+    status varchar(20),
     grade INTEGER,
-    course_id INTEGER REFERENCES Course(id),
-    teacher_id INTEGER REFERENCES Teacher(id),
-    student_id INTEGER REFERENCES Student(studentnumber),
-    subject_id INTEGER REFERENCES Subject(id)
+    teacher_id INTEGER REFERENCES Teacher(id) ON DELETE CASCADE,
+    student_id INTEGER REFERENCES Student(studentnumber) ON DELETE CASCADE,
+    subject_id INTEGER REFERENCES Subject(id) ON DELETE CASCADE
 );

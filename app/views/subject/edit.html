@@ -1,49 +1,76 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if errors %}
+<div class="alert, alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 
+<h1>Muokkaa aihetta Miinaharava</h1>
 
-  <h1>Muokkaa aihetta Miinaharava</h1>
-  
-  <ul>
-      <li><strong>Vaikeusaste: </strong>{{attributes.difficulty}}</li>
-      <li><strong>Arvosanamaksimi: </strong>{{attributes.maxgrade}}</li>
-      <li><strong>Valintakerrat: </strong>1</li>
-      <li><strong>Keskeytykset: </strong>0</li>
-      <li><strong>Suoritusprosentti: </strong>100%</li>
-      <li><strong>Keskimääräinen arvosana: </strong>4</li>
-      <li><strong>Viimeksi valittu: </strong>1.1.2016</li>
-  </ul>
-  
-  <p style="word-wrap: break-word">
-      {{attributes.description}}
-  </p>
-  
-  <form class="col-xs-6" method="post" action="">
-      <div class="form-group">
-          <label>Nimi</label>
-          <input name="name" type="text" class="form-control" value="{{attributes.name}}">
-      </div>
-      <div class="form-group">
-          <label>Vaikeusaste</label>
-          <select name="difficulty" class="selectpicker">
-              <option selected="selected">{{attributes.difficulty}}</option>
-              <option>Helppo</option>
-              <option>Keskitasoa</option>
-              <option>Vaikea</option>
-          </select>
-      </div>
-      <div class="form-group">
-          <label>Arvosanamaksimi</label>
-          <input name="maxgrade" type="number" class="form-control" value="{{attributes.maxgrade}}">
-      </div>
-      <div class="form-group">
-          <label>Kuvaus</label>
-          <textarea name="description" class="form-control" rows="7">{{attributes.description}}</textarea>
-      </div>
-      <div class="form-group">
-          <button type="submit" class="btn btn-primary">Tallenna</button>
-      </div>
-  </form>
+<ul>
+    <li><strong>Vaikeusaste: </strong>{{attributes.difficulty}}</li>
+    <li><strong>Arvosanamaksimi: </strong>{{attributes.maxgrade}}</li>
+    <li><strong>Valintakerrat: </strong>1</li>
+    <li><strong>Keskeytykset: </strong>0</li>
+    <li><strong>Suoritusprosentti: </strong>100%</li>
+    <li><strong>Keskimääräinen arvosana: </strong>4</li>
+    <li><strong>Viimeksi valittu: </strong>1.1.2016</li>
+</ul>
+
+<p style="word-wrap: break-word">
+    {{attributes.description}}
+</p>
+
+<form class="form-horizontal" method="post" action="">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nimi</label>
+        <div class="col-md-4">
+            <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="difficulty">Vaikeusaste</label>
+        <div class="col-md-4">
+            <select name="difficulty" class="selectpicker form-control">
+                {% for difficulty in difficulties %}
+                {% if attributes.difficulty == difficulty %}
+                <option selected="selected">{{difficulty}}</option>
+                {% else %}
+                <option>{{difficulty}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Arvosanamaksimi</label>
+        <div class="col-md-4">
+            <select name="maxgrade" class="selectpicker form-control">
+                {% for maxgrade in maxgrades %}
+                {% if attributes.maxgrade == maxgrade %}
+                <option selected="">{{maxgrade}}</option>
+                {% else %}
+                <option>{{maxgrade}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Kuvaus</label>
+        <div class="col-md-5">
+            <textarea name="description" class="form-control" rows="5">{{attributes.description}}</textarea>
+        </div>
+    </div>
+    <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-primary pull-right">Tallenna</button>
+    </div>
+</form>
 
 {% endblock %}

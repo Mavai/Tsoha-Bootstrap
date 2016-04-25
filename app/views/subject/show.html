@@ -1,5 +1,6 @@
 {% import "macros/forms.html" as forms %}
 {% extends "base.html" %}
+
 {% block content %}
 
 <div>
@@ -7,6 +8,7 @@
 </div>
 
 {% if message %}
+<br>
 <div class="alert alert-success">
     {{message}}
 </div>
@@ -29,9 +31,22 @@
     {{subject.description}}
 </p>
 
+{% if user_logged_in %}
 <div>
     <a href="{{base_path}}/aihe/{{subject.id}}/edit" class="btn btn-default">Muokkaa</a>
     {{forms.destroy_button("#{base_path}/aihe/#{subject.id}/destroy")}}
+    <a href="{{base_path}}/newassignment?subjectid={{subject.id}}&userid={{user_logged_in.id}}" class="btn btn-primary pull-right">Lisää suoritus</a>
 </div>
+{% endif %}
+
+
+
+<br>
+
+{% if user_logged_in %}
+<div>
+    {% include 'assignment/index.html' %}
+</div>
+{% endif %}
 
 {% endblock %}

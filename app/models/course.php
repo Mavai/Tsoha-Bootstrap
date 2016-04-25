@@ -2,10 +2,11 @@
 
 class Course extends BaseModel {
     
-    public $id, $name, $subjectCount;
+    public $id, $name, $subjectCount, $validators;
     
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name');
     }
     
     public static function findAll() {
@@ -50,8 +51,17 @@ class Course extends BaseModel {
         $this->id = $row['id'];
     }
     
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Course WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
     
-    
-    
+    public function validate_name() {
+        $errors = array();
+        if ($this->name == '' || $this->name == NULL) {
+            $errors[] = 'Nimi ei saa olla tyhjä';
+        }
+        return $errors;
+    }
 }
 

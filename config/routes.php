@@ -57,9 +57,30 @@ $routes->post('/aihe/:id/destroy', function($id) {
 });
 
 $routes->get('/login', function() {
-    UserController::login();
+    try {
+        $previous = $_SERVER['HTTP_REFERER'];
+        UserController::login($previous);
+    } catch (Exception $ex) {
+        UserController::login(null);
+    }
 });
 
 $routes->post('/login', function() {
     UserController::handle_login();
+});
+
+$routes->post('/logout', function() {
+    UserController::logout();
+});
+
+$routes->get('/suoritus/:id', function ($id) {
+    AssignmentController::show($id);
+});
+
+$routes->post('/kurssit', function() {
+    CourseController::store();
+});
+
+$routes->post('/kurssi/:id/destroy', function($id) {
+    CourseController::destroy($id);
 });
