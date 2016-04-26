@@ -55,7 +55,10 @@ class Subject extends BaseModel {
         $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject  WHERE course_id = :id ORDER BY added');
         $query->execute(array('id' => $courseId));
         $rows = $query->fetchAll();
-        
+        $query = DB::connection()->prepare('SELECT AVG(Assignment.grade) FROM Subject, Assignment WHERE course_id = :id AND subject.id = assignment.subject_id');
+        $query->execute(array('id' => $courseId));
+        $avg = $query->fetchAll();
+
         $subjects = array();
         
         foreach ($rows as $row) {
@@ -70,6 +73,14 @@ class Subject extends BaseModel {
             ));
         }
         return $subjects;
+    }
+    
+    public static function avgGradeIn($courseId) {
+        $query = DB::connection()->prepare('SELECT ROUND(AVG(Assignment.grade), 2) AS averagegrade FROM Subject, Assignment WHERE course_id = :id AND subject.id = assignment.subject_id');
+        $query->execute(array('id' => $courseId));
+        $rows = $query->fetchAll();
+        $avg = $rows[0];
+        return $avg['averagegrade'];
     }
 
     public function save() {

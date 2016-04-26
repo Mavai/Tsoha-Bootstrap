@@ -77,6 +77,14 @@
 
         <!-- Oma skriptitiedostomme -->
         <script src="{{base_path}}/assets/js/site.js"></script>
+        <script>
+$(function () {
+    $("#datepicker").datepicker();
+    $("#format").change(function () {
+        $("#datepicker").datepicker("option", "dateFormat", $(this).val());
+    });
+});
+        </script>
         {% endblock %}
     </body>
 </html>

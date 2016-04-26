@@ -70,7 +70,8 @@ $routes->post('/login', function() {
 });
 
 $routes->post('/logout', function() {
-    UserController::logout();
+    $previous = $_SERVER['HTTP_REFERER'];
+    UserController::logout($previous);
 });
 
 $routes->get('/suoritus/:id', function ($id) {
@@ -83,4 +84,8 @@ $routes->post('/kurssit', function() {
 
 $routes->post('/kurssi/:id/destroy', function($id) {
     CourseController::destroy($id);
+});
+
+$routes->get('/assignment/new', function() {
+    AssignmentController::create();
 });

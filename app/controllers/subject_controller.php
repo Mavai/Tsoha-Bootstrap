@@ -5,8 +5,9 @@ class SubjectController extends BaseController {
     public static function index($id) {
         $subjects = Subject::findAllIn($id);
         $course = Course::findId($id);
+        $avg = Subject::avgGradeIn($id);
 
-        View::make('subject/index.html', array('aiheet' => $subjects, 'course' => $course));
+        View::make('subject/index.html', array('aiheet' => $subjects, 'course' => $course, 'avg' => $avg));
     }
 
     public static function show($id) {
