@@ -50,7 +50,7 @@ class Subject extends BaseModel {
         }
         return null;
     }
-    
+
     public static function findAllIn($courseId) {
         $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject  WHERE course_id = :id ORDER BY added');
         $query->execute(array('id' => $courseId));
@@ -60,7 +60,7 @@ class Subject extends BaseModel {
         $avg = $query->fetchAll();
 
         $subjects = array();
-        
+
         foreach ($rows as $row) {
             $subjects[] = new Subject(array(
                 'id' => $row['id'],
@@ -74,26 +74,49 @@ class Subject extends BaseModel {
         }
         return $subjects;
     }
-    
-    public static function avgGradeIn($courseId) {
-        $query = DB::connection()->prepare('SELECT ROUND(AVG(Assignment.grade), 2) AS averagegrade FROM Subject, Assignment WHERE course_id = :id AND subject.id = assignment.subject_id');
-        $query->execute(array('id' => $courseId));
+
+    public static function avgGradeIn($subjectId) {
+        $query = DB::connection()->prepare('SELECT ROUND(AVG(Assignment.grade), 1) AS averagegrade FROM Subject, Assignment WHERE course_id = :id AND subject.id = assignment.subject_id');
+        $query->execute(array('id' => $subjectId));
         $rows = $query->fetchAll();
         $avg = $rows[0];
         return $avg['averagegrade'];
     }
 
+    public static function completionInfo($subjectId) {
+        $query = DB::connection()->prepare('SELECT (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE Subject.id = Assignment.subject_id
+                                            AND Subject.id = :id) AS all, 
+                                            (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE Subject.id = Assignment.subject_id
+                                            AND Subject.id = :id AND Assignment.status = \'valmis\') AS completed, 
+                                            (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE subject.id = Assignment.subject_id
+                                            AND subject.id = :id AND (assignment.status = \'valmis\' OR assignment.status = \'keskeytetty\')) AS finished,
+                                            (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE Subject.id = Assignment.subject_id 
+                                            AND Subject.id = :id AND Assignment.status = \'keskeytetty\') AS aborted,
+                                            (SELECT to_char(Added, \'DD.MM.YYYY\') FROM Assignment, Subject WHERE Subject.id = Assignment.subject_id 
+                                            AND Subject.id = :id ORDER BY Added LIMIT 1) AS latest');
+        $query->execute(array(':id' => $subjectId));
+        $rows = $query->fetchAll();
+        $row = $rows[0];
+        if ($row['finished'] != 0) {
+            $completionInfo = array('all' => $row['all'], 'completionrate' => round($row['completed'] / $row['finished'], 3), 'aborted' => $row['aborted'],
+                                    'latest' => $row['latest']);
+        } else {
+            $completionInfo = array('all' => $row['all'], 'completionrate' => 0, 'aborted' => $row['aborted']);
+        }
+        return $completionInfo;
+    }
+
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Subject (name, difficulty, maxgrade, description, course_id, added) '
                 . 'VALUES (:name, :difficulty, :maxgrade, :description, :course_id, :added) RETURNING id');
-        $query->execute(array(':name' => $this->name, ':difficulty' => $this->difficulty, ':maxgrade' => $this->maxgrade, 
+        $query->execute(array(':name' => $this->name, ':difficulty' => $this->difficulty, ':maxgrade' => $this->maxgrade,
             ':description' => $this->description, ':course_id' => $this->course->id, ':added' => date('d.m.Y')));
-        
+
         $row = $query->fetch();
-        
+
         $this->id = $row['id'];
     }
-    
+
     public function update() {
         $query = DB::connection()->prepare('UPDATE Subject SET name = :name, difficulty = :difficulty, maxgrade = :maxgrade, description = :description WHERE id = :id2');
         $query->bindValue(':name', $this->name);
@@ -102,10 +125,10 @@ class Subject extends BaseModel {
         $query->bindValue(':description', $this->description);
         $query->bindValue(':id2', $this->id);
         $query->execute();
-        
+
         $row = $query->fetch();
     }
-    
+
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Subject WHERE id = :id');
         $query->execute(array('id' => $this->id));
@@ -118,7 +141,7 @@ class Subject extends BaseModel {
         }
         return $errors;
     }
-    
+
     public function validate_maxgrade() {
         $errors = array();
         if ($this->maxgrade == '' || $this->maxgrade == NULL) {

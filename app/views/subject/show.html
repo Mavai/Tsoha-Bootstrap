@@ -19,12 +19,12 @@
 <ul>
     <li><strong>Vaikeusaste: </strong>{{subject.difficulty}}</li>
     <li><strong>Arvosanamaksimi: </strong>{{subject.maxgrade}}</li>
-    <li><strong>Valintakerrat: </strong>1</li>
-    <li><strong>Keskeytykset: </strong>0</li>
-    <li><strong>Suoritusprosentti: </strong>100%</li>
-    <li><strong>Keskimääräinen arvosana: </strong>4</li>
+    <li><strong>Valintakerrat: </strong>{{completioninfo.all}}</li>
+    <li><strong>Keskeytykset: </strong>{{completioninfo.aborted}}</li>
+    <li><strong>Suoritusprosentti: </strong>{{completioninfo.completionrate * 100}}%</li>
+    <li><strong>Keskimääräinen arvosana: </strong>{{avg}}</li>
     <li><strong>Lisätty: </strong>{{subject.added}}</li>
-    <li><strong>Viimeksi valittu: </strong>1.1.2016</li>
+    <li><strong>Viimeksi valittu: </strong>{{completioninfo.latest}}</li>
 </ul>
 
 <p style="word-wrap: break-word">

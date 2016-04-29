@@ -89,3 +89,7 @@ $routes->post('/kurssi/:id/destroy', function($id) {
 $routes->get('/assignment/new', function() {
     AssignmentController::create();
 });
+
+$routes->post('/assignment/new', function() {
+    AssignmentController::store();
+});

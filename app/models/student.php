@@ -40,4 +40,12 @@ class Student extends BaseModel {
         return null;
     }
 
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Student (studentnumber, name) VALUES (:studentnumber, :name)');
+        $query->bindValue(':studentnumber', $this->studentnumber);
+        $query->bindValue(':name', $this->name);
+        $query->execute();
+        $row = $query->fetch();
+    }
+
 }
