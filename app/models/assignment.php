@@ -6,7 +6,7 @@ class Assignment extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array();
+        $this->validators = array('validate_status', 'validate_grade', 'validate_dates');
     }
 
     public static function findAll() {
@@ -84,12 +84,52 @@ class Assignment extends BaseModel {
         $query->bindValue(':status', $this->status);
         $query->bindValue(':grade', $this->grade);
         $query->bindValue(':subject_id', $this->subject->id);
-        $query->bindValue(':student_id', $this->student->studentnumber);
+        $query->bindValue(':student_id', $this->student);
         $query->bindValue(':teacher_id', $this->teacher->id);
         $query->execute();
         $row = $query->fetch();
 
         $this->id = $row['id'];
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Assignment WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+    
+    public function validate_status() {
+        $errors = array();
+        if ($this->status == '' || $this->status == NULL) {
+            $errors[] = 'Suorituksella on oltava jokin status';
+        }
+        return $errors;
+    }
+    
+    public function validate_grade() {
+        $errors = array();
+        if ($this->status == 'Kesken' || $this->status == 'Keskeytetty') {
+            if ($this->grade != NULL || $this->grade != '') {
+                $errors[] = 'Keskeneräisellä tai keskeytetyllä suorituksella ei voi olla arvosanaa.';
+            }
+        }
+        if ($this->status == 'Valmis' && $this->grade == '') {
+            $errors[] = 'Anna suoritukselle arvosana.';
+        }
+        return $errors;
+    }
+    
+    public function validate_dates() {
+        $errors = array();
+        if ($this->begindate == '') {
+            $errors[] = 'Anna suorituksen alkamispäivä.';
+        }
+        if (($this->status == 'Valmis' || $this->status == 'Keskeytetty') && $this->enddate == '') {
+            $errors[] = 'Anna suorituksen lopetupäivä.';
+        }
+        if ($this->enddate == '') {
+            $this->enddate = NULL;
+        }
+        return $errors;
     }
 
 }

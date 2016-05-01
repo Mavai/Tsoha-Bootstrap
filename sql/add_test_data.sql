@@ -40,31 +40,31 @@ INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) 
             ('Shakki', 'Haastava', 5, 'Tekoäly shakkipeliin', current_date, 3);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'kesken', 1, 0123456789, 1);
+            (current_date, current_date, 'Kesken', 1, 0123456789, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'kesken', 1, 0123456779, 1);
+            (current_date, current_date, 'Kesken', 1, 0123456779, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'valmis', 5, 1, 0123456769, 1);
+            (current_date, current_date, 'Valmis', 5, 1, 0123456769, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'valmis', 4, 1, 0123456759, 1);
+            (current_date, current_date, 'Valmis', 4, 1, 0123456759, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'valmis', 3, 1, 0123456749, 1);
+            (current_date, current_date, 'Valmis', 3, 1, 0123456749, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'valmis', 2, 1, 0123456739, 1);
+            (current_date, current_date, 'Valmis', 2, 1, 0123456739, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'valmis', 0, 1, 0123456729, 1);
+            (current_date, current_date, 'Valmis', 0, 1, 0123456729, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'keskeytetty', 1, 0123456719, 1);
+            (current_date, current_date, 'Keskeytetty', 1, 0123456719, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'keskeytetty', 1, 0123456709, 1);
+            (current_date, current_date, 'Keskeytetty', 1, 0123456709, 1);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'keskeytetty', 1, 0123456009, 1);
+            (current_date, current_date, 'Keskeytetty', 1, 0123456009, 1);

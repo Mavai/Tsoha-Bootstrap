@@ -93,3 +93,7 @@ $routes->get('/assignment/new', function() {
 $routes->post('/assignment/new', function() {
     AssignmentController::store();
 });
+
+$routes->post('/suoritus/:id/destroy', function($id) {
+    AssignmentController::destroy($id);
+});

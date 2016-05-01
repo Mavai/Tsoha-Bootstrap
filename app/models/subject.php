@@ -87,11 +87,11 @@ class Subject extends BaseModel {
         $query = DB::connection()->prepare('SELECT (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE Subject.id = Assignment.subject_id
                                             AND Subject.id = :id) AS all, 
                                             (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE Subject.id = Assignment.subject_id
-                                            AND Subject.id = :id AND Assignment.status = \'valmis\') AS completed, 
+                                            AND Subject.id = :id AND Assignment.status = \'Valmis\') AS completed, 
                                             (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE subject.id = Assignment.subject_id
-                                            AND subject.id = :id AND (assignment.status = \'valmis\' OR assignment.status = \'keskeytetty\')) AS finished,
+                                            AND subject.id = :id AND (assignment.status = \'Valmis\' OR assignment.status = \'Keskeytetty\')) AS finished,
                                             (SELECT COUNT(Assignment.id) FROM Subject, Assignment WHERE Subject.id = Assignment.subject_id 
-                                            AND Subject.id = :id AND Assignment.status = \'keskeytetty\') AS aborted,
+                                            AND Subject.id = :id AND Assignment.status = \'Keskeytetty\') AS aborted,
                                             (SELECT to_char(Added, \'DD.MM.YYYY\') FROM Assignment, Subject WHERE Subject.id = Assignment.subject_id 
                                             AND Subject.id = :id ORDER BY Added LIMIT 1) AS latest');
         $query->execute(array(':id' => $subjectId));

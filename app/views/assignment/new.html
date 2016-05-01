@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
 
+<div>
+    <a href="{{base_path}}/aihe/{{subject}}" class="btn btn-primary btn-arrow-left">Takaisin aiheen esittelysivulle</a>
+</div>
+
 <h1>Suorituksen lisäys</h1>
 
 {% if errors %}
@@ -16,7 +20,7 @@
 <div>
     <form class="form-horizontal" method="post" action="">
         <div class="form-group">
-            <label class="col-md-1 control-label">Nimi</label>
+            <label class="col-md-1 control-label">Opiskelijan nimi</label>
             <div class="col-md-4">
                 <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
             </div>
@@ -28,11 +32,11 @@
         <div class="form-group">
             <label class="col-md-1 control-label">Aloituspvm</label>
             <div class="col-md-4">
-                <input name="begindate" type="date" class="form-control input-md">
+                <input name="begindate" type="date" class="form-control input-md" value="{{attributes.begindate|default(today)}}">
             </div>
             <label class="col-md-1 control-label">Lopetuspvm</label>
             <div class="col-md-4">
-                <input name="enddate" type="date" class="form-control input-md">
+                <input name="enddate" type="date" class="form-control input-md" value="{{attributes.enddate}}">
             </div>
         </div>
         <div class="form-group">

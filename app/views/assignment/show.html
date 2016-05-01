@@ -1,3 +1,4 @@
+{% import "macros/forms.html" as forms %}
 {% extends 'base.html' %}
 
 {% block content %}
@@ -6,17 +7,31 @@
     <a href="{{base_path}}/aihe/{{assignment.subject.id}}" class="btn btn-primary btn-arrow-left">Takaisin aiheen "{{assignment.subject.name}}" sivulle</a>
 </div>
 
-<h1>Harjoitustyö</h1>
+{% if message %}
+<br>
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+<h1>Harjoitustyö<small> {{assignment.student.name}}</small></h1>
 
 <ul>
     <li><strong>Oppilas: </strong>{{assignment.student.name}}</li>
     <li><strong>Opiskelijanumero: </strong>{{assignment.student.studentnumber}}</li>
     <li><strong>Kurssi: </strong>{{assignment.subject.course.name}}</li>
     <li><strong>Aihe: </strong>{{assignment.subject.name}}</li>
-    <li><strong>Tehtävän antajja: </strong>{{assignment.teacher.name}}</li>
+    <li><strong>Tehtävän antaja: </strong>{{assignment.teacher.name}}</li>
     <li><strong>Aloituspäivämäärä: </strong>{{assignment.begindate}}</li>
     <li><strong>Lopetuspäivämäärä: </strong>{{assignment.enddate}}</li>
     <li><strong>Status: </strong>{{assignment.status}}</li>
     <li><strong>Arvosana: </strong>{{assignment.grade}}</li>
 </ul>
+
+{% if user_logged_in %}
+<div>
+    <a href="#" class="btn btn-default">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/suoritus/#{assignment.id}/destroy")}}
+</div>
+{% endif %}
 {% endblock %}
