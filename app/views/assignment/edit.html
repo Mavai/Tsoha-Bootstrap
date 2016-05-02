@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div>
-    <a href="{{base_path}}/aihe/{{subject}}" class="btn btn-primary btn-arrow-left">Takaisin aiheen esittelysivulle</a>
-</div>
-
-<h1>Suorituksen lisäys</h1>
+<h1>Suorituksen muokkaus</h1>
 
 {% if errors %}
 <div class="alert, alert-danger">
@@ -22,17 +18,17 @@
         <div class="form-group">
             <label class="col-md-1 control-label">Opiskelijan nimi</label>
             <div class="col-md-4">
-                <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
+                <input readonly="" name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
             </div>
             <label class="col-md-1 control-label">Opiskelijanro</label>
             <div class="col-md-4">
-                <input name="studentnumber" type="text" class="form-control input-md" value="{{attributes.studentnumber}}">
+                <input readonly="" name="studentnumber" type="text" class="form-control input-md" value="0{{attributes.studentnumber}}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-1 control-label">Aloituspvm</label>
             <div class="col-md-4">
-                <input name="begindate" type="date" class="form-control input-md" value="{{attributes.begindate|default(today)}}">
+                <input name="begindate" type="date" class="form-control input-md" value="{{attributes.begindate}}">
             </div>
             <label class="col-md-1 control-label">Lopetuspvm</label>
             <div class="col-md-4">
@@ -68,7 +64,10 @@
             </div>
         </div>
         <div class="form-group col-md-2">
-            <button type="submit" class="btn btn-primary pull-right">Lisää</button>
+            <button type="submit" class="btn btn-primary pull-right">Tallenna</button>
+        </div>
+        <div class="form-group col-md-2 text-center">
+            <a href="{{base_path}}/suoritus/{{attributes.id}}" class="btn btn-default">Peruuta</a>
         </div>
     </form>
 </div>

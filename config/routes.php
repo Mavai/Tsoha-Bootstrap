@@ -97,3 +97,11 @@ $routes->post('/assignment/new', function() {
 $routes->post('/suoritus/:id/destroy', function($id) {
     AssignmentController::destroy($id);
 });
+
+$routes->get('/suoritus/:id/edit', function($id) {
+    AssignmentController::edit($id);
+});
+
+$routes->post('/suoritus/:id/edit', function($id) {
+    AssignmentController::update($id);
+});

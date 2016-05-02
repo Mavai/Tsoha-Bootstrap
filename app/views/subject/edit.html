@@ -11,21 +11,7 @@
 </div>
 {% endif %}
 
-<h1>Muokkaa aihetta Miinaharava</h1>
-
-<ul>
-    <li><strong>Vaikeusaste: </strong>{{attributes.difficulty}}</li>
-    <li><strong>Arvosanamaksimi: </strong>{{attributes.maxgrade}}</li>
-    <li><strong>Valintakerrat: </strong>1</li>
-    <li><strong>Keskeytykset: </strong>0</li>
-    <li><strong>Suoritusprosentti: </strong>100%</li>
-    <li><strong>Keskimääräinen arvosana: </strong>4</li>
-    <li><strong>Viimeksi valittu: </strong>1.1.2016</li>
-</ul>
-
-<p style="word-wrap: break-word">
-    {{attributes.description}}
-</p>
+<h1>Muokkaa aihetta {{name}}</h1>
 
 <form class="form-horizontal" method="post" action="">
     <div class="form-group">
@@ -70,6 +56,10 @@
     </div>
     <div class="form-group col-md-2">
         <button type="submit" class="btn btn-primary pull-right">Tallenna</button>
+
+    </div>
+    <div class="form-group col-md-2 text-center">
+        <a href="{{base_path}}/aihe/{{attributes.id}}" class="btn btn-default">Peruuta</a>
     </div>
 </form>
 

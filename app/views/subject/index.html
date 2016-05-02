@@ -24,13 +24,15 @@
           </tr>
       </thead>
       <tbody>
+          {% set aiheid = "" %}
           {% for aihe in aiheet %}
           <tr>
               <td><a href="{{base_path}}/aihe/{{aihe.id}}">{{aihe.name}}</a></td>
               <td>{{aihe.difficulty}}</td>
               <td>{{aihe.maxgrade}}</td>
-              <td></td>
-              <td>{{avg}}</td>
+              <td>{{aihe.all}}</td>
+              {% set aiheid = aihe.id %}
+              <td>{{aihe.avggrade}}</td>
           </tr>
           {% endfor %}
       </tbody>

@@ -40,7 +40,7 @@ class AssignmentController extends BaseController {
         $assignment = new Assignment($attributes);
         $errors = $assignment->errors();
         $errors = array_merge($errors, $student->errors());
-
+        Kint::dump($errors);
         if (count($errors) == 0) {
             if (Student::findId($params['studentnumber']) == NULL) {
                 $student->save();
@@ -53,7 +53,7 @@ class AssignmentController extends BaseController {
             View::make('assignment/new.html', array('errors' => $errors, 'attributes' => $attributes, 'statuses' => $statuses, 'grades' => $grades));
         }
     }
-    
+
     public static function destroy($id) {
         self::check_logged_in();
         $assignment = Assignment::findId($id);
@@ -61,6 +61,45 @@ class AssignmentController extends BaseController {
         $assignment->destroy();
 
         Redirect::to('/aihe/' . $subjectid, array('message' => 'Suoritus poistettiin onnistuneesti.'));
+    }
+
+    public static function edit($id) {
+        self::check_logged_in();
+        $assignment = Assignment::findId($id);
+        $student = Student::findId($assignment->student->studentnumber);
+        $attributes = array_merge((array) $assignment, (array) $student);
+        $attributes['begindate'] = date('Y-m-d', strtotime($attributes['begindate']));
+        $attributes['enddate'] = date('Y-m-d', strtotime($attributes['enddate']));
+        $statuses = array('Kesken', 'Valmis', 'Keskeytetty');
+        $grades = array('', 0, 1, 2, 3, 4, 5);
+        View::make('assignment/edit.html', array('statuses' => $statuses, 'grades' => $grades, 'attributes' => $attributes, 'student' => $student));
+    }
+
+    public static function update($id) {
+        self::check_logged_in();
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+            'begindate' => $params['begindate'],
+            'enddate' => $params['enddate'],
+            'status' => $params['status'],
+            'grade' => $params['grade'],
+            'name' => $params['name'],
+            'studentnumber' => $params['studentnumber']
+        );
+
+        $assignment = new Assignment($attributes);
+        $errors = $assignment->errors();
+
+        if (count($errors) > 0) {
+            $statuses = array('Kesken', 'Valmis', 'Keskeytetty');
+            $grades = array('', 0, 1, 2, 3, 4, 5);
+            View::make('assignment/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'statuses' => $statuses, 'grades' => $grades));
+        } else {
+            $assignment->update();
+            Redirect::to('/suoritus/' . $assignment->id, array('message' => 'Suoritus päivitetty onnistuneesti.'));
+        }
     }
 
 }

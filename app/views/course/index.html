@@ -21,7 +21,7 @@
             <td><a href="{{base_path}}/aiheet/{{course.id}}">{{course.name}}</a></td>
             <td>{{counts[course.id]}}</td>
             {% if user_logged_in %}
-            <td class="text-center">{{forms.destroy_button_small("#{base_path}/kurssi/#{course.id}/destroy")}}</td>
+            <td class="text-center">{{forms.destroy_button_small("#{base_path}/kurssi/#{course.id}/destroy", "Oletko varma, että haluat poistaa kurssin?")}}</td>
             {% endif %}
         </tr>
     </tbody>
@@ -35,7 +35,6 @@
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
 
-        <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -65,7 +64,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Peruuta</button>
             </div>
         </div>
     </div>

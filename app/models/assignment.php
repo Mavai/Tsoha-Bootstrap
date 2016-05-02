@@ -129,7 +129,22 @@ class Assignment extends BaseModel {
         if ($this->enddate == '') {
             $this->enddate = NULL;
         }
+        if ($this->status == 'Kesken' && $this->enddate != '') {
+            $errors[] = 'Keskeneräisellä suorituksella ei voi olla lopetuspäivää.';
+        }
         return $errors;
+    }
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Assignment SET begindate = :begindate, enddate = :enddate, status = :status, grade = :grade WHERE id = :id');
+        $query->bindValue(':begindate', $this->begindate);
+        $query->bindValue(':enddate', $this->enddate);
+        $query->bindValue(':status', $this->status);
+        $query->bindValue(':grade', $this->grade);
+        $query->bindValue(':id', $this->id);
+        $query->execute();
+
+        $row = $query->fetch();
     }
 
 }

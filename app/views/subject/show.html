@@ -27,24 +27,19 @@
     <li><strong>Viimeksi valittu: </strong>{{completioninfo.latest}}</li>
 </ul>
 
-<p style="word-wrap: break-word">
-    {{subject.description}}
-</p>
+<p class="col-md-10" style="white-space: pre-wrap; word-wrap: break-word">{{subject.description}}</p>
+
 
 {% if user_logged_in %}
-<div>
+<div class="col-md-12 panel-group">
     <a href="{{base_path}}/aihe/{{subject.id}}/edit" class="btn btn-default">Muokkaa</a>
-    {{forms.destroy_button("#{base_path}/aihe/#{subject.id}/destroy")}}
+    {{forms.destroy_button("#{base_path}/aihe/#{subject.id}/destroy", "Oletko varma, että haluat poistaa aiheen?")}}
     <a href="{{base_path}}/assignment/new?subjectid={{subject.id}}&userid={{user_logged_in.id}}" class="btn btn-primary pull-right">Lisää suoritus</a>
 </div>
 {% endif %}
 
-
-
-<br>
-
 {% if user_logged_in %}
-<div>
+<div class="col-md-12 pull-left panel-group">
     {% include 'assignment/index.html' %}
 </div>
 {% endif %}

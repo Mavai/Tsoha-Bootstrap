@@ -18,7 +18,7 @@
 
 <ul>
     <li><strong>Oppilas: </strong>{{assignment.student.name}}</li>
-    <li><strong>Opiskelijanumero: </strong>{{assignment.student.studentnumber}}</li>
+    <li><strong>Opiskelijanumero: </strong>0{{assignment.student.studentnumber}}</li>
     <li><strong>Kurssi: </strong>{{assignment.subject.course.name}}</li>
     <li><strong>Aihe: </strong>{{assignment.subject.name}}</li>
     <li><strong>Tehtävän antaja: </strong>{{assignment.teacher.name}}</li>
@@ -30,8 +30,8 @@
 
 {% if user_logged_in %}
 <div>
-    <a href="#" class="btn btn-default">Muokkaa</a>
-    {{forms.destroy_button("#{base_path}/suoritus/#{assignment.id}/destroy")}}
+    <a href="{{base_path}}/suoritus/{{assignment.id}}/edit" class="btn btn-default">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/suoritus/#{assignment.id}/destroy", "Oletko varma, että haluat poistaa suorituksen?")}}
 </div>
 {% endif %}
 {% endblock %}

@@ -3,11 +3,19 @@
 class SubjectController extends BaseController {
 
     public static function index($id) {
-        $subjects = Subject::findAllIn($id);
+        $subjectsOld = Subject::findAllIn($id);
         $course = Course::findId($id);
-        $avg = Subject::avgGradeIn($id);
-
-        View::make('subject/index.html', array('aiheet' => $subjects, 'course' => $course, 'avg' => $avg));
+        $subjects = array();
+        
+        foreach ($subjectsOld as $subject) {
+            $completioninfo = Subject::completionInfo($subject->id);
+            $avg = Subject::avgGradeIn($subject->id);
+            $subject = (array)$subject;
+            $subject['avggrade'] = $avg;
+            $subject['all'] = $completioninfo['all'];
+            $subjects[] = $subject;
+        }
+        View::make('subject/index.html', array('aiheet' => $subjects, 'course' => $course));
     }
 
     public static function show($id) {
@@ -58,12 +66,14 @@ class SubjectController extends BaseController {
         $subject = Subject::findId($id);
         $difficulties = array('Helppo', 'Keskitasoa', 'Vaikea');
         $maxgrades = array(1, 2, 3, 4, 5);
-        View::make('subject/edit.html', array('attributes' => $subject, 'difficulties' => $difficulties, 'maxgrades' => $maxgrades));
+        $name = $subject->name;
+        View::make('subject/edit.html', array('attributes' => $subject, 'difficulties' => $difficulties, 'maxgrades' => $maxgrades, 'name' => $name));
     }
 
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
+        $name = Subject::findId($id)->name;
 
         $attributes = array(
             'id' => $id,
@@ -79,7 +89,7 @@ class SubjectController extends BaseController {
         if (count($errors) > 0) {
             $difficulties = array('Helppo', 'Keskitasoa', 'Vaikea');
             $maxgrades = array(1, 2, 3, 4, 5);
-            View::make('subject/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'difficulties' => $difficulties, 'maxgrades' => $maxgrades));
+            View::make('subject/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'difficulties' => $difficulties, 'maxgrades' => $maxgrades, 'name' => $name));
         } else {
             $subject->update();
             Redirect::to('/aihe/' . $subject->id, array('message' => 'Aihe päivitetty onnistuneesti.'));
