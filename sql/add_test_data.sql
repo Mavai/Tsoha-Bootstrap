@@ -10,25 +10,25 @@ INSERT INTO Teacher (name, password) VALUES ('Matti Meikäläinen', 'aaaaa');
 
 INSERT INTO Teacher (name, password) VALUES ('Mavai', 'aaaaa');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456779, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456779, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456769, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456769, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456759, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456759, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456749, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456749, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456739, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456739, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456729, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456729, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456719, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456719, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456709, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456709, 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456009, 'Testi Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES (0123456009, 'Esimerkki Henkilö');
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
             ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli', current_date, 1);

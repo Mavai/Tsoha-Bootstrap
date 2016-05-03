@@ -50,7 +50,7 @@ class AssignmentController extends BaseController {
         } else {
             $statuses = array('Kesken', 'Valmis', 'Keskeytetty');
             $grades = array('', 0, 1, 2, 3, 4, 5);
-            View::make('assignment/new.html', array('errors' => $errors, 'attributes' => $attributes, 'statuses' => $statuses, 'grades' => $grades));
+            View::make('assignment/new.html', array('errors' => $errors, 'attributes' => $attributes, 'statuses' => $statuses, 'grades' => $grades, 'subject' => $_GET['subjectid']));
         }
     }
 

@@ -22,7 +22,7 @@ class UserController extends BaseController {
         $_SESSION['user'] = $user->id;
         
         if ($previous != " ") {
-            Redirect::to($previous[1], array('message' => 'Tervetuloa' . $user->name));
+            Redirect::to($previous[1], array('message' => 'Tervetuloa, ' . $user->name));
         } else {
             Redirect::to('/', array('message' => 'Tervetuloa' . $user->name));
         }
