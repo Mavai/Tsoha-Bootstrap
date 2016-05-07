@@ -3,12 +3,14 @@
 class AssignmentController extends BaseController {
 
     public static function show($id) {
+        self::check_logged_in();
         $assignment = Assignment::findId($id);
 
         View::make('assignment/show.html', array('assignment' => $assignment));
     }
 
     public static function create() {
+        self::check_logged_in();
         $statuses = array('Kesken', 'Valmis', 'Keskeytetty');
         $grades = array('', 0, 1, 2, 3, 4, 5);
         View::make('assignment/new.html', array('statuses' => $statuses, 'grades' => $grades, 'today' => date("Y-m-d"), 'subject' => $_GET['subjectid']));
@@ -57,10 +59,10 @@ class AssignmentController extends BaseController {
     public static function destroy($id) {
         self::check_logged_in();
         $assignment = Assignment::findId($id);
-        $subjectid = $assignment->subject->id;
+        $studentnumber = $assignment->student->studentnumber;
         $assignment->destroy();
 
-        Redirect::to('/aihe/' . $subjectid, array('message' => 'Suoritus poistettiin onnistuneesti.'));
+        Redirect::to('/oppilas/' . $studentnumber, array('message' => 'Suoritus poistettiin onnistuneesti.'));
     }
 
     public static function edit($id) {

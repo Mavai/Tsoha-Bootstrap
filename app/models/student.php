@@ -40,6 +40,14 @@ class Student extends BaseModel {
         }
         return null;
     }
+    
+    public static function info($studentnumber) {
+        $query = DB::connection()->prepare('SELECT COUNT(studentnumber) AS count FROM Student, Assignment WHERE studentnumber = :studentnumber '
+                . 'AND Assignment.student_id = studentnumber');
+        $query->execute(array(':studentnumber' => $studentnumber));
+        $row = $query->fetch();
+        return $row['count'];
+    }
 
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO Student (studentnumber, name) VALUES (:studentnumber, :name)');
@@ -47,6 +55,19 @@ class Student extends BaseModel {
         $query->bindValue(':name', $this->name);
         $query->execute();
         $row = $query->fetch();
+    }
+    
+    public function update($old) {
+        $query = DB::connection()->prepare('UPDATE Student SET name = :name, studentnumber = :new WHERE studentnumber = :studentnumber');
+        $query->bindValue(':name', $this->name);
+        $query->bindValue(':new', $this->studentnumber);
+        $query->bindValue(':studentnumber', $old);
+        $query->execute();
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Student WHERE studentnumber = :studentnumber');
+        $query->execute(array(':studentnumber' => $this->studentnumber));
     }
     
     public function validate_studentnumber() {

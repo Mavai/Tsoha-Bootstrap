@@ -10,28 +10,28 @@ INSERT INTO Teacher (name, password) VALUES ('Matti Meikäläinen', 'aaaaa');
 
 INSERT INTO Teacher (name, password) VALUES ('Mavai', 'aaaaa');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456789, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456789', 'Marko Vainio');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456779, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456779', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456769, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456769', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456759, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456759', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456749, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456749', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456739, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456739', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456729, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456729', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456719, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456719', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456709, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456709', 'Esimerkki Henkilö');
 
-INSERT INTO Student (studentnumber, name) VALUES (0123456009, 'Esimerkki Henkilö');
+INSERT INTO Student (studentnumber, name) VALUES ('0123456009', 'Esimerkki Henkilö');
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
-            ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli', current_date, 1);
+            ('Miinaharava', 'Helppo', 5, 'Perinteinen miinaharava- peli', current_timestamp, 1);
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
             ('Työaihekanta', 'Keskitasoa', 5, 
@@ -49,7 +49,7 @@ Toimintoja:
 - suoritustietojen kirjaus ja muokkaus
 - opettajien yhteenvedot
 - ylläpito voi lisätä ja muokata opettajien ja opiskelijoiden tietoja'
-, current_date, 2);
+, current_timestamp, 2);
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES
             ('Vedonlyönti', 'Vaikea', 5,
@@ -70,7 +70,7 @@ Toimintoja:
 - Kertoimien määritteleminen (voi olla automaattinen)
 
 Sovelluksessa voidaan rajoittua vain tietyntyyppisiin vetoihin.',
-current_date, 2);
+current_timestamp, 2);
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES
             ('Ostoskassi', 'Keskitasoa', 5, 
@@ -89,37 +89,46 @@ Toimintoja:
 - Lentokohtaiset tilausraportit toimitusta varten
 - Toimitusasiakirja ja lasku
 - Tuotetietojen lisäys, muokkas ja poisto',
-current_date, 2);
+current_timestamp, 2);
 
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
-            ('Shakki', 'Haastava', 5, 'Tekoäly shakkipeliin', current_date, 3);
+            ('Shakki', 'Haastava', 5, 'Tekoäly shakkipeliin', current_timestamp, 3);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Kesken', 1, 0123456789, 2);
+            (current_date, current_timestamp, 'Kesken', 1, '0123456789', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Kesken', 1, 0123456779, 2);
+            (current_date, current_timestamp, 'Kesken', 1, '0123456779', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Valmis', 5, 1, 0123456769, 2);
+            (current_date, current_timestamp, 'Valmis', 5, 1, '0123456769', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Valmis', 4, 1, 0123456759, 2);
+            (current_date, current_timestamp, 'Valmis', 4, 1, '0123456759', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Valmis', 3, 1, 0123456749, 2);
+            (current_date, current_timestamp, 'Valmis', 3, 1, '0123456749', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Valmis', 2, 1, 0123456739, 2);
+            (current_date, current_timestamp, 'Valmis', 2, 1, '0123456739', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Valmis', 0, 1, 0123456729, 2);
+            (current_date, current_timestamp, 'Valmis', 0, 1, '0123456729', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Keskeytetty', 1, 0123456719, 2);
+            (current_date, current_timestamp, 'Keskeytetty', 1, '0123456719', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Keskeytetty', 1, 0123456709, 2);
+            (current_date, current_timestamp, 'Keskeytetty', 1, '0123456709', 2);
 
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
-            (current_date, current_date, 'Keskeytetty', 1, 0123456009, 2);
+            (current_date, current_timestamp, 'Keskeytetty', 1, '0123456009', 2);
+
+INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
+            (current_date, current_timestamp, 'Valmis', 5, 1, '0123456789', 1);
+
+INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
+            (current_date, current_timestamp, 'Valmis', 4, 1, '0123456789', 3);
+
+INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
+            (current_date, current_timestamp, 'Valmis', 5, 1, '0123456789', 4);

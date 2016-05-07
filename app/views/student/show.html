@@ -1,0 +1,44 @@
+{% import "macros/forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block content %}
+{% if message %}
+<br>
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+<h1>{{student.name}}<small> Suoritukset</small></h1>
+<div>
+<table class="table table-striped table-bordered">
+      <thead>
+          <tr>
+              <th>Kurssi</th>
+              <th>Aihe</th>
+              <th>Status</th>
+              <th>Arvosana</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for assignment in assignments %}
+          <tr>
+              <td><a href="{{base_path}}/aiheet/{{assignment.subject.course.id}}">{{assignment.subject.course.name}}</a></td>
+              <td><a href="{{base_path}}/aihe/{{assignment.subject.id}}">{{assignment.subject.name}}</a></td>
+              <td>{{assignment.status}}</td>
+              <td>{{assignment.grade}}</td>
+              <td class="text-center"><a href="{{base_path}}/suoritus/{{assignment.id}}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-info-sign"></span></a>
+                  {{forms.destroy_button_small("#{base_path}/suoritus/#{assignment.id}/destroy", "Oletko varma, että haluat poistaa aiheen?")}}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+<div>
+    <a href="{{base_path}}/oppilas/{{student.studentnumber}}/edit" class="btn btn-default">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/oppilas/#{student.studentnumber}/destroy", "Oletko varma, että haluat poistaa aiheen?")}}
+</div>
+
+{% endblock %}

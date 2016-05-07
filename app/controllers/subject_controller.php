@@ -20,7 +20,7 @@ class SubjectController extends BaseController {
 
     public static function show($id) {
         $subject = Subject::findId($id);
-        $assignments = Assignment::findAllIn($subject->id);
+        $assignments = Assignment::findAllInSubject($subject->id);
         $completionInfo = Subject::completionInfo($id);
         $avg = Subject::avgGradeIn($id);
 

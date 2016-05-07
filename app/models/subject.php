@@ -52,7 +52,7 @@ class Subject extends BaseModel {
     }
 
     public static function findAllIn($courseId) {
-        $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject  WHERE course_id = :id ORDER BY name');
+        $query = DB::connection()->prepare('SELECT *, to_char(added, \'DD.MM.YYYY\') FROM Subject  WHERE course_id = :id ORDER BY Added');
         $query->execute(array('id' => $courseId));
         $rows = $query->fetchAll();
         $query = DB::connection()->prepare('SELECT AVG(Assignment.grade) FROM Subject, Assignment WHERE course_id = :id AND subject.id = assignment.subject_id');

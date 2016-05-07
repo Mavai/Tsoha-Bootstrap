@@ -53,10 +53,33 @@ class Assignment extends BaseModel {
         return null;
     }
 
-    public static function findAllIn($subjectId) {
+    public static function findAllInSubject($subjectId) {
         $query = DB::connection()->prepare('SELECT *, to_char(begindate, \'DD.MM.YYYY\') AS begin, to_char(enddate, \'DD.MM.YYYY\') AS end 
                                             FROM Assignment  WHERE subject_id = :id ORDER BY Status DESC, Grade DESC');
         $query->execute(array('id' => $subjectId));
+        $rows = $query->fetchAll();
+
+        $assignments = array();
+
+        foreach ($rows as $row) {
+            $assignments[] = new Assignment(array(
+                'id' => $row['id'],
+                'begindate' => $row['begin'],
+                'enddate' => $row['end'],
+                'status' => $row['status'],
+                'grade' => $row['grade'],
+                'teacher' => User::findId($row['teacher_id']),
+                'student' => Student::findId($row['student_id']),
+                'subject' => Subject::findId($row['subject_id'])
+            ));
+        }
+        return $assignments;
+    }
+    
+    public static function findAllInStudent($studentnumber) {
+        $query = DB::connection()->prepare('SELECT *, to_char(begindate, \'DD.MM.YYYY\') AS begin, to_char(enddate, \'DD.MM.YYYY\') AS end 
+                                            FROM Assignment  WHERE student_id = :studentnumber ORDER BY Status DESC, Grade DESC');
+        $query->execute(array(':studentnumber' => $studentnumber));
         $rows = $query->fetchAll();
 
         $assignments = array();
