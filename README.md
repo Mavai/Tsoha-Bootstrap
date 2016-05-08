@@ -22,7 +22,7 @@
 * **Nimi:** Matti Meikäläineni
 * **Salasana:** aaaaa
 * **Oikeudet:** Ohjaaja  
-
-**Nimi:** Normi
-**Salasana:** aaaaa
-**Oikeudet:** Normaali  
+<br>
+* **Nimi:** Normi
+* **Salasana:** aaaaa
+* **Oikeudet:** Normaali  
