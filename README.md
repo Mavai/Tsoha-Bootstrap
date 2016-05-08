@@ -17,12 +17,10 @@
 ## Kirjautuminen
 * **Nimi:** Mavai
 * **Salasana:** aaaaa
-* **Oikeudet:** admin  
-
+* **Oikeudet:** admin
 * **Nimi:** Matti Meikäläinen
 * **Salasana:** aaaaa
-* **Oikeudet:** ohjaaja  
-
+* **Oikeudet:** ohjaaja
 * **Nimi:** Normi
 * **Salasana:** aaaaa
-* **Oikeudet:** normaali  
+* **Oikeudet:** normaali
