@@ -21,7 +21,11 @@ class BaseController {
         if (!isset($_SESSION['user'])) {
             Redirect::to('/login', array('error' => 'Sinun tulee ensin kirjautua sisään!'));
         } else if (self::get_user_logged_in()->rights != 'Admin') {
-            $url = $_SERVER['HTTP_REFERER'];
+            if (!isset($_SERVER['HTTP_REFERER'])) {
+                $url = NULL;
+            } else {
+                $url = $_SERVER['HTTP_REFERER'];
+            }
             if ($url == null) {
                 $url = 'tsohaprojekti/';
             }
@@ -34,7 +38,11 @@ class BaseController {
         if (!isset($_SESSION['user'])) {
             Redirect::to('/login', array('error' => 'Sinun tulee ensin kirjautua sisään!'));
         } else if (self::get_user_logged_in()->rights != 'Admin' && self::get_user_logged_in()->rights != 'Ohjaaja') {
-            $url = $_SERVER['HTTP_REFERER'];
+            if (!isset($_SERVER['HTTP_REFERER'])) {
+                $url = NULL;
+            } else {
+                $url = $_SERVER['HTTP_REFERER'];
+            }
             if ($url == null) {
                 $url = 'tsohaprojekti/';
             }
