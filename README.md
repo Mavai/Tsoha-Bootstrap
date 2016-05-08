@@ -15,5 +15,14 @@
 [Työaihekanta](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Tyoaihekanta.html) 
   
 ## Kirjautuminen
-* **Nimi:** Matti Meikäläinen  
+* **Nimi:** Mavai
 * **Salasana:** aaaaa
+* **Oikeudet:** admin  
+
+* **Nimi:** Matti Meikäläinen
+* **Salasana:** aaaaa
+* **Oikeudet:** ohjaaja  
+
+* **Nimi:** Normi
+* **Salasana:** aaaaa
+* **Oikeudet:** normaali  
