@@ -23,8 +23,8 @@
                         {% for assignment in assignments %}
                         <tr>
                             <td>{{loop.index}}</td>
-                            <td><a href="#">{{assignment.student.name}}</a></td>
-                            <td>0{{assignment.student.studentnumber}}</td>
+                            <td><a href="{{base_path}}/oppilas/{{assignment.student.studentnumber}}">{{assignment.student.name}}</a></td>
+                            <td>{{assignment.student.studentnumber}}</td>
                             <td>{{assignment.status}}</td>
                             <td>{{assignment.grade}}</td>
                             <td><a href="{{base_path}}/suoritus/{{assignment.id}}">Tietoja <span class="glyphicon glyphicon-chevron-right"></span></a></td>

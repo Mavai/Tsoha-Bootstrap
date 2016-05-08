@@ -6,7 +6,7 @@ class Course extends BaseModel {
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name');
+        $this->validators = array('validate_name', 'validate_name_length');
     }
     
     public static function findAll() {
@@ -41,6 +41,18 @@ class Course extends BaseModel {
         return null;
     }
     
+    public static function courseInfo($id) {
+        $query = DB::connection()->prepare('SELECT (SELECT COUNT (Assignment.id) FROM Assignment, Subject WHERE Subject.course_id = :id AND Assignment.subject_id = Subject.id) AS all, '
+                . '(SELECT COUNT(Assignment.id) FROM Assignment, Subject WHERE Subject.course_id = :id AND Assignment.subject_id = Subject.id AND Assignment.status = \'Keskeytetty\') AS aborted,'
+                . '(SELECT COUNT(Assignment.id) FROM Assignment, Subject WHERE Subject.course_id = :id AND Assignment.subject_id = Subject.id AND Assignment.grade = 0) AS failed,'
+                . '(SELECT ROUND(AVG(Assignment.grade), 1) FROM Assignment, Subject WHERE Subject.course_id = :id AND Assignment.subject_id = Subject.id) AS avggrade');
+        $query->execute(array(':id' => $id));
+        $row = $query->fetch();
+        $info = array('all' => $row['all'], 'aborted' => $row['aborted'], 'failed' => $row['failed'], 'avggrade' => $row['avggrade']);
+        return $info;
+    }
+
+
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO course (name) VALUES (:name) RETURNING id');
         
@@ -62,6 +74,10 @@ class Course extends BaseModel {
             $errors[] = 'Nimi ei saa olla tyhjä';
         }
         return $errors;
+    }
+    
+    public function validate_name_length() {
+        return parent::validate_string_length($this->name, 50, 'Nimi');
     }
 }
 

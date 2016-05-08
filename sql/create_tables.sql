@@ -7,11 +7,12 @@ CREATE TABLE Course(
 CREATE TABLE Teacher(
     id SERIAL PRIMARY KEY,
     name varchar(50),
-    password varchar(50)
+    password varchar(50),
+    rights varchar(50)
 );
 
 CREATE TABLE Student(
-    studentnumber NUMERIC PRIMARY KEY,
+    studentnumber varchar(10) PRIMARY KEY,
     name varchar(50)
 );
 
@@ -20,9 +21,9 @@ CREATE TABLE Subject(
     name varchar(50),
     difficulty varchar(50),
     maxgrade INTEGER,
-    description varchar(500),
-    added DATE,
-    course_id INTEGER REFERENCES Course(id) ON DELETE CASCADE
+    description varchar(5000),
+    added TIMESTAMP,
+    course_id INTEGER REFERENCES Course(id) ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE Assignment(
@@ -31,7 +32,7 @@ CREATE TABLE Assignment(
     enddate DATE,
     status varchar(20),
     grade INTEGER,
-    teacher_id INTEGER REFERENCES Teacher(id) ON DELETE CASCADE,
-    student_id INTEGER REFERENCES Student(studentnumber) ON DELETE CASCADE,
-    subject_id INTEGER REFERENCES Subject(id) ON DELETE CASCADE
+    teacher_id INTEGER REFERENCES Teacher(id) ON DELETE SET NULL ON UPDATE CASCADE,
+    student_id varchar(10) REFERENCES Student(studentnumber) ON DELETE CASCADE ON UPDATE CASCADE,
+    subject_id INTEGER REFERENCES Subject(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

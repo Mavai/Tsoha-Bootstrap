@@ -70,7 +70,8 @@ $routes->post('/login', function() {
 });
 
 $routes->post('/logout', function() {
-    UserController::logout();
+    $previous = $_SERVER['HTTP_REFERER'];
+    UserController::logout($previous);
 });
 
 $routes->get('/suoritus/:id', function ($id) {
@@ -83,4 +84,72 @@ $routes->post('/kurssit', function() {
 
 $routes->post('/kurssi/:id/destroy', function($id) {
     CourseController::destroy($id);
+});
+
+$routes->get('/assignment/new', function() {
+    AssignmentController::create();
+});
+
+$routes->post('/assignment/new', function() {
+    AssignmentController::store();
+});
+
+$routes->post('/suoritus/:id/destroy', function($id) {
+    AssignmentController::destroy($id);
+});
+
+$routes->get('/suoritus/:id/edit', function($id) {
+    AssignmentController::edit($id);
+});
+
+$routes->post('/suoritus/:id/edit', function($id) {
+    AssignmentController::update($id);
+});
+
+$routes->get('/oppilas/:id', function($studentnumber) {
+    StudentController::show($studentnumber);
+});
+
+$routes->get('/oppilaat', function() {
+    StudentController::index();
+});
+
+$routes->get('/register', function() {
+    TeacherController::create();
+});
+
+$routes->post('/register', function() {
+    TeacherController::store();
+});
+
+$routes->get('/oppilas/:studentnumber/edit', function($studentnumber) {
+    StudentController::edit($studentnumber);
+});
+
+$routes->post('/oppilas/:studentnumber/edit', function($studentnumber) {
+    StudentController::update($studentnumber);
+});
+
+$routes->get('/opettajat', function() {
+    TeacherController::index();
+});
+
+$routes->get('/opettaja/:id/edit', function($id) {
+    TeacherController::edit($id);
+});
+
+$routes->post('/opettaja/:id/edit', function($id) {
+    TeacherController::update($id);
+});
+
+$routes->post('/oppilas/:studentnumber/destroy', function($studentnumber) {
+    StudentController::destroy($studentnumber);
+});
+
+$routes->post('/opettaja/:id/destroy', function($id) {
+    TeacherController::destroy($id);
+});
+
+$routes->get('/aiheet/:id/summary', function($courseId) {
+    SubjectController::summary($courseId);
 });

@@ -14,6 +14,14 @@
         }
       }
     }
+    
+    public function validate_string_length($string, $length, $target) {
+        $errors = array();
+        if (strlen($string) > $length) {
+            $errors[] = $target . ' on liian pitkä.';
+        }
+        return $errors;
+    }
 
     public function errors(){
       // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona

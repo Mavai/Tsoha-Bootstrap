@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Suorituksen lisäys</h1>
+<h1>Suorituksen muokkaus</h1>
 
 {% if errors %}
 <div class="alert, alert-danger">
@@ -13,38 +13,41 @@
 </div>
 {% endif %}
 
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
 <div>
     <form class="form-horizontal" method="post" action="">
         <div class="form-group">
-            <label class="col-md-1 control-label">Nimi</label>
+            <label class="col-md-1 control-label">Opiskelijan nimi</label>
             <div class="col-md-4">
-                <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
+                <input readonly="" name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
             </div>
             <label class="col-md-1 control-label">Opiskelijanro</label>
             <div class="col-md-4">
-                <input name="studentnumber" type="text" class="form-control input-md" value="{{attributes.studentnumber}}">
+                <input readonly="" name="studentnumber" type="text" class="form-control input-md" value="{{attributes.studentnumber}}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-1 control-label">Aloituspvm</label>
             <div class="col-md-4">
-                <p>Date: <input type="text" id="datepicker" size="30"></p>
-                <input name="begindate" type="date" class="form-control input-md">
+                <input name="begindate" type="date" class="form-control input-md" value="{{attributes.begindate}}">
             </div>
             <label class="col-md-1 control-label">Lopetuspvm</label>
             <div class="col-md-4">
-                <input name="studentnumber" type="date" class="form-control input-md">
+                <input name="enddate" type="date" class="form-control input-md" value="{{attributes.enddate}}">
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-1 control-label" for="difficulty">Status</label>
             <div class="col-md-4">
                 <select name="status" class="selectpicker form-control">
-                    {% for difficulty in difficulties %}
-                    {% if attributes.difficulty == difficulty %}
-                    <option selected="selected">{{difficulty}}</option>
+                    {% for status in statuses %}
+                    {% if attributes.status == status %}
+                    <option selected="selected">{{status}}</option>
                     {% else %}
-                    <option>{{difficulty}}</option>
+                    <option>{{status}}</option>
                     {% endif %}
                     {% endfor %}
                 </select>
@@ -54,22 +57,23 @@
             <label class="col-md-1 control-label">Arvosana</label>
             <div class="col-md-4">
                 <select name="grade" class="selectpicker form-control">
-                    {% for maxgrade in maxgrades %}
-                    {% if attributes.maxgrade == maxgrade %}
-                    <option selected="">{{maxgrade}}</option>
+                    {% for grade in grades %}
+                    {% if attributes.grade == grade %}
+                    <option selected="">{{grade}}</option>
                     {% else %}
-                    <option>{{maxgrade}}</option>
+                    <option>{{grade}}</option>
                     {% endif %}
                     {% endfor %}
                 </select>
             </div>
         </div>
         <div class="form-group col-md-2">
-            <button type="submit" class="btn btn-primary pull-right">Lisää</button>
+            <button type="submit" class="btn btn-primary pull-right">Tallenna</button>
+        </div>
+        <div class="form-group col-md-2 text-center">
+            <a href="{{base_path}}/suoritus/{{attributes.id}}" class="btn btn-default">Peruuta</a>
         </div>
     </form>
 </div>
 
-
 {% endblock %}
-

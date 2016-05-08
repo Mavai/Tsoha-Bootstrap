@@ -7,6 +7,12 @@
 </div>
 {% endif %}
 
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 <div class="wrapper">
     <form class="form-signin" method="post" action="{{base_path}}/login">
         <h2 class="form-signin-heading">Kirjaudu sisään</h2>

@@ -1,0 +1,41 @@
+{% import "macros/forms.html" as forms %}
+{% extends "base.html" %}
+
+{% block content %}
+{% if errors %}
+<div class="alert, alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
+<h1>Muokkaa tietoja<small> {{attributes.name}}</small></h1>
+
+<form class="form-horizontal" method="post" action="">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Nimi</label>
+        <div class="col-md-4">
+            <input name="name" type="text" class="form-control input-md" value="{{attributes.name}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Opiskelijanumero</label>
+        <div class="col-md-4">
+            <input name="studentnumber" class="form-control" value="{{attributes.studentnumber}}"></input>
+        </div>
+    </div>
+    <div class="form-group col-md-2">
+        <button type="submit" class="btn btn-primary pull-right">Tallenna</button>
+    </div>
+    <div class="form-group col-md-2 text-center">
+        <a href="{{base_path}}/oppilas/{{studentnumber}}" class="btn btn-default">Peruuta</a>
+    </div>
+</form>
+{% endblock %}

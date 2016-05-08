@@ -14,7 +14,6 @@ class UserController extends BaseController {
         if ($previousURL == null) {
             $previousURL = 'tsohaprojekti/';
         }
-        Kint::dump($previousURL);
         $previous = explode('tsohaprojekti', $previousURL);
 
         if (!$user) {
@@ -23,15 +22,17 @@ class UserController extends BaseController {
         $_SESSION['user'] = $user->id;
         
         if ($previous != " ") {
-            Redirect::to($previous[1], array('message' => 'Tervetuloa' . $user->name));
+            Redirect::to($previous[1], array('message' => 'Tervetuloa, ' . $user->name));
         } else {
             Redirect::to('/', array('message' => 'Tervetuloa' . $user->name));
         }
     }
 
-    public static function logout() {
+    public static function logout($previous) {
+        self::check_logged_in();
         $_SESSION['user'] = null;
-        Redirect::to('/etusivu', array('message' => 'Olet kirjautunut ulos'));
+        $prev = explode('tsohaprojekti', $previous);
+        Redirect::to($prev[1], array('message' => 'Olet kirjautunut ulos'));
     }
 
 }
