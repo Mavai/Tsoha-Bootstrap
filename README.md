@@ -15,9 +15,9 @@
 [Työaihekanta](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Tyoaihekanta.html) 
   
 ## Kirjautuminen
-**Nimi:** Mavai
-**Salasana:** aaaaa
-**Oikeudet:** admin  
+* **Nimi:** Mavai
+* **Salasana:** aaaaa
+* **Oikeudet:** admin  
 
 **Nimi:** Matti Meikäläineni
 **Salasana:** aaaaa
