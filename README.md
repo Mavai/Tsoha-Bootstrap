@@ -19,9 +19,9 @@
 * **Salasana:** aaaaa
 * **Oikeudet:** admin  
 
-**Nimi:** Matti Meikäläineni
-**Salasana:** aaaaa
-**Oikeudet:** Ohjaaja  
+* **Nimi:** Matti Meikäläineni
+* **Salasana:** aaaaa
+* **Oikeudet:** Ohjaaja  
 
 **Nimi:** Normi
 **Salasana:** aaaaa
