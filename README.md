@@ -15,14 +15,14 @@
 [Työaihekanta](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Tyoaihekanta.html) 
   
 ## Kirjautuminen
-* **Nimi:** Mavai
-* **Salasana:** aaaaa
-* **Oikeudet:** admin  
+**Nimi:** Mavai
+**Salasana:** aaaaa
+**Oikeudet:** admin  
 
-* **Nimi:** Matti Meikäläineni
-* **Salasana:** aaaaa
-* **Oikeudet:** Ohjaaja  
+**Nimi:** Matti Meikäläineni
+**Salasana:** aaaaa
+**Oikeudet:** Ohjaaja  
 
-* **Nimi:** Normi
-* **Salasana:** aaaaa
-* **Oikeudet:** Normaali  
+**Nimi:** Normi
+**Salasana:** aaaaa
+**Oikeudet:** Normaali  
