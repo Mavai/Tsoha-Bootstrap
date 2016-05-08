@@ -11,6 +11,10 @@
 </div>
 {% endif %}
 
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
 <h1>{{course.name}} <small>Aiheet</small></h1>
   
   <table class="table table-striped table-bordered">
@@ -40,6 +44,7 @@
   
   {% if user_logged_in %}
   <a href="{{base_path}}/aiheet/{{course.id}}/new" class="btn btn-primary">Lisää aihe</a>
+  <a href="{{base_path}}/aiheet/{{course.id}}/summary" class="btn btn-primary pull-right">Yhteenveto</a>
   {% endif %}
 
 {% endblock %}

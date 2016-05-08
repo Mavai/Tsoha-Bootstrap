@@ -42,7 +42,6 @@ class AssignmentController extends BaseController {
         $assignment = new Assignment($attributes);
         $errors = $assignment->errors();
         $errors = array_merge($errors, $student->errors());
-        Kint::dump($errors);
         if (count($errors) == 0) {
             if (Student::findId($params['studentnumber']) == NULL) {
                 $student->save();

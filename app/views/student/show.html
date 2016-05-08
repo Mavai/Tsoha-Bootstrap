@@ -9,6 +9,10 @@
 </div>
 {% endif %}
 
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
 <h1>{{student.name}}<small> Suoritukset</small></h1>
 <div>
 <table class="table table-striped table-bordered">

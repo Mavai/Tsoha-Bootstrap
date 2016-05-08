@@ -6,9 +6,11 @@ INSERT INTO Course (name) VALUES ('Tietokantasovellus');
 
 INSERT INTO Course (name) VALUES ('Tietorakenteet ja algoritmit');
 
-INSERT INTO Teacher (name, password) VALUES ('Matti Meikäläinen', 'aaaaa');
+INSERT INTO Teacher (name, password, rights) VALUES ('Normi', 'aaaaa', 'Normaali');
 
-INSERT INTO Teacher (name, password) VALUES ('Mavai', 'aaaaa');
+INSERT INTO Teacher (name, password, rights) VALUES ('Matti Meikäläinen', 'aaaaa', 'Ohjaaja');
+
+INSERT INTO Teacher (name, password, rights) VALUES ('Mavai', 'aaaaa', 'Admin');
 
 INSERT INTO Student (studentnumber, name) VALUES ('0123456789', 'Marko Vainio');
 
@@ -94,6 +96,12 @@ current_timestamp, 2);
 INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
             ('Shakki', 'Haastava', 5, 'Tekoäly shakkipeliin', current_timestamp, 3);
 
+INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
+            ('Shakki', 'Haastava', 5, 'Tekoäly shakkipeliin', current_timestamp, 1);
+
+INSERT INTO Subject (name, difficulty, maxgrade, description, added, course_id) VALUES 
+            ('Shakki', 'Haastava', 5, 'Tekoäly shakkipeliin', current_timestamp, 1);
+
 INSERT INTO Assignment (begindate, enddate, status, teacher_id, student_id, subject_id) VALUES 
             (current_date, current_timestamp, 'Kesken', 1, '0123456789', 2);
 
@@ -132,3 +140,9 @@ INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_i
 
 INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
             (current_date, current_timestamp, 'Valmis', 5, 1, '0123456789', 4);
+
+INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
+            (current_date, current_timestamp, 'Valmis', 5, 1, '0123456789', 6);
+
+INSERT INTO Assignment (begindate, enddate, status, grade, teacher_id, student_id, subject_id) VALUES 
+            (current_date, current_timestamp, 'Valmis', 5, 1, '0123456789', 6);

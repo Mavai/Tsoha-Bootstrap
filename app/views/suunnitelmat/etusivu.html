@@ -7,9 +7,14 @@
 </div>
 {% endif %}
 
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
   <h1>Tervetuloa työaihekantaan</h1>
 
-  <p class="lead">Täältä löydät kurssikohtaisesti tietoa tietojenkäsittelytieteen harjoitustöiden aiheista.</p>
+  <p class="lead">Täältä löydät kurssikohtaisesti tietoa tietojenkäsittelytieteen harjoitustöiden aiheista.<br>
+  Opettajat voivat rekisteröityä ja kirjautuneena sisään lisätä kursseja, aiheta ja suorituksia.</p>
   
   <a href="{{base_path}}/kurssit" class="btn btn-primary btn-lg">Selaa kursseja</a>
   

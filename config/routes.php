@@ -149,3 +149,7 @@ $routes->post('/oppilas/:studentnumber/destroy', function($studentnumber) {
 $routes->post('/opettaja/:id/destroy', function($id) {
     TeacherController::destroy($id);
 });
+
+$routes->get('/aiheet/:id/summary', function($courseId) {
+    SubjectController::summary($courseId);
+});

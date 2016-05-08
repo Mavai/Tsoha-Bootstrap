@@ -6,7 +6,7 @@ class Subject extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_maxgrade');
+        $this->validators = array('validate_name', 'validate_maxgrade', 'validate_name_length', 'validate_description_length');
     }
 
     public static function findAll() {
@@ -70,6 +70,26 @@ class Subject extends BaseModel {
                 'description' => $row['description'],
                 'added' => $row['to_char'],
                 'course' => Course::findId($row['course_id']),
+            ));
+        }
+        return $subjects;
+    }
+    
+    public static function findTop10In($courseId) {
+        $query = DB::connection()->prepare('SELECT Subject.id, Subject.name, Subject.difficulty, to_char(Subject.added, \'DD.MM.YY\') as added, count(assignment.id) AS Suorituksia from Subject, Assignment '
+                . 'WHERE Subject.id = Assignment.subject_id AND Subject.course_id = :courseId '
+                . 'GROUP BY Subject.id, Subject.name, Subject.difficulty, Subject.maxgrade, Subject.description, Subject.added, Subject.course_id ORDER BY Suorituksia DESC LIMIT 10;');
+        $query->execute(array(':courseId' => $courseId));
+        $rows = $query->fetchAll();
+
+        $subjects = array();
+
+        foreach ($rows as $row) {
+            $subjects[] = new Subject(array(
+                'id' => $row['id'],
+                'name' => $row['name'],
+                'difficulty' => $row['difficulty'],
+                'added' => $row['added']
             ));
         }
         return $subjects;
@@ -148,6 +168,14 @@ class Subject extends BaseModel {
             $errors[] = 'Anna arvosanamaksimi';
         }
         return $errors;
+    }
+    
+    public function validate_name_length() {
+        return parent::validate_string_length($this->name, 50, 'Nimi');
+    }
+    
+    public function validate_description_length() {
+        return parent::validate_string_length($this->description, 5000, 'Kuvaus');
     }
 
 }

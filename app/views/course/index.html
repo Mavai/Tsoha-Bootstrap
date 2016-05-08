@@ -8,6 +8,10 @@
 </div>
 {% endif %}
 
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
 <h1>Tietojenkäsittelytieteen harjoitustyöt</h1>
 
 <table  class="table table-striped table-bordered">
@@ -83,7 +87,7 @@
 <script src="{{base_path}}/vendor/bootstrap/js/bootstrap-select.min.js"></script>
 <script src="{{base_path}}/vendor/bootstrap/js/pagination.js"></script>
 <script src="{{base_path}}/assets/js/site.js"></script>
-{% if error %}
+{% if errors %}
 <script type="text/javascript">
 $(window).load(function () {
     $('#myModal').modal('show');

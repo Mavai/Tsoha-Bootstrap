@@ -3,7 +3,7 @@
 class TeacherController extends BaseController {
 
     public static function index() {
-        self::check_logged_in();
+        self::check_logged_as_admin();
         $teachers = User::findAll();
         View::make('teacher/index.html', array('teachers' => $teachers));
     }
@@ -17,7 +17,8 @@ class TeacherController extends BaseController {
 
         $attributes = array(
             'name' => $params['name'],
-            'password' => $params['password']
+            'password' => $params['password'],
+            'rights' => 'Normaali'
         );
         $user = new User($attributes);
         $errors = array();
@@ -29,7 +30,7 @@ class TeacherController extends BaseController {
 
         if (count($errors) == 0) {
             $user->save();
-            Redirect::to('', array('Reskisteröinti onnistui'));
+            Redirect::to('', array('message' => 'Reskisteröinti onnistui, voit nyt kirjautua sisään luomillasi tunnuksilla'));
         } else {
             View::make('teacher/new.html', array('attributes' => $attributes, 'errors' => $errors));
         }
@@ -38,7 +39,8 @@ class TeacherController extends BaseController {
     public static function edit($id) {
         self::check_logged_in();
         $teacher = User::findId($id);
-        View::make('teacher/edit.html', array('attributes' => $teacher));
+        $rights = array('Admin', 'Ohjaaja', 'Normaali');
+        View::make('teacher/edit.html', array('attributes' => $teacher, 'rights' => $rights));
     }
 
     public static function update($id) {
@@ -48,7 +50,8 @@ class TeacherController extends BaseController {
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
-            'password' => $params['password']
+            'password' => $params['password'],
+            'rights' => $params['rights']
         );
 
         $teacher = new User($attributes);

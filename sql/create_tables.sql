@@ -7,7 +7,8 @@ CREATE TABLE Course(
 CREATE TABLE Teacher(
     id SERIAL PRIMARY KEY,
     name varchar(50),
-    password varchar(50)
+    password varchar(50),
+    rights varchar(50)
 );
 
 CREATE TABLE Student(

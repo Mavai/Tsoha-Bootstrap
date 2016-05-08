@@ -105,5 +105,23 @@ class SubjectController extends BaseController {
 
         Redirect::to('/aiheet/' . $course_id, array('message' => $name . ' poistettiin onnistuneesti.'));
     }
+    
+    public static function summary($courseId) {
+        self::check_logged_as_ohjaaja();
+        $subjectsOld = Subject::findTop10In($courseId);
+        $course = Course::findId($courseId);
+        $subjects = array();
+        
+        foreach ($subjectsOld as $subject) {
+            $completioninfo = Subject::completionInfo($subject->id);
+            $avg = Subject::avgGradeIn($subject->id);
+            $subject = (array)$subject;
+            $subject['avggrade'] = $avg;
+            $subject['all'] = $completioninfo['all'];
+            $subjects[] = $subject;
+        }
+        $info = Course::courseInfo($courseId);
+        View::make('course/summary.html', array('subjects' => $subjects, 'course' => $course, 'info' => $info));
+    }
 
 }

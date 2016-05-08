@@ -6,7 +6,7 @@ class Student extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_studentnumber', 'validate_authentity', 'validate_name');
+        $this->validators = array('validate_studentnumber', 'validate_authentity', 'validate_name', 'validate_name_length');
     }
 
     public static function findAll() {
@@ -94,6 +94,10 @@ class Student extends BaseModel {
             $errors[] = 'Anna opiskelijan nimi';
         }
         return $errors;
+    }
+    
+    public function validate_name_length() {
+        return parent::validate_string_length($this->name, 50, 'Nimi');
     }
 
 }

@@ -2,11 +2,11 @@
 
 class User extends BaseModel {
 
-    public $id, $name, $password, $validators;
+    public $id, $name, $password, $rights, $validators;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_password');
+        $this->validators = array('validate_name', 'validate_password', 'validate_name_length', 'validate_password_length');
     }
 
     public static function authenticate($name, $password) {
@@ -51,7 +51,8 @@ class User extends BaseModel {
             $user = new User(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
-                'password' => $row['password']
+                'password' => $row['password'],
+                'rights' => $row['rights']
             ));
             return $user;
         }
@@ -59,9 +60,10 @@ class User extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Teacher (name, password) VALUES (:name, :password) RETURNING id');
+        $query = DB::connection()->prepare('INSERT INTO Teacher (name, password, rights) VALUES (:name, :password, :rights) RETURNING id');
         $query->bindValue(':name', $this->name);
         $query->bindValue(':password', $this->password);
+        $query->bindValue(':rights', $this->rights);
         $query->execute();
         $row = $query->fetch();
         $this->id = $row['id'];
@@ -84,16 +86,25 @@ class User extends BaseModel {
     }
     
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Teacher SET name = :name, password = :password WHERE id = :id');
+        $query = DB::connection()->prepare('UPDATE Teacher SET name = :name, password = :password, rights = :rights WHERE id = :id');
         $query->bindValue(':name', $this->name);
         $query->bindValue(':password', $this->password);
         $query->bindValue(':id', $this->id);
+        $query->bindValue(':rights', $this->rights);
         $query->execute();
     }
     
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Teacher WHERE id = :id');
         $query->execute(array(':id' => $this->id));
+    }
+    
+    public function validate_password_length() {
+        return parent::validate_string_length($this->password, 50, 'Salasana');
+    }
+    
+    public function validate_name_length() {
+        return parent::validate_string_length($this->name, 50, 'Nimi');
     }
 
 }

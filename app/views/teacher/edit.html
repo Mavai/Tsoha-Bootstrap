@@ -27,6 +27,22 @@
             <input name="password" class="form-control" value="{{attributes.password}}"></input>
         </div>
     </div>
+    {% if user_logged_in.id != attributes.id %}
+    <div class="form-group">
+        <label class="col-md-2 control-label" for="rights">Oikeudet</label>
+        <div class="col-md-4">
+            <select name="rights" class="selectpicker form-control">
+                {% for right in rights %}
+                {% if attributes.rights == right %}
+                <option selected="selected">{{right}}</option>
+                {% else %}
+                <option>{{right}}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    {% endif %}
     <div class="form-group col-md-2">
         <button type="submit" class="btn btn-primary pull-right">Tallenna</button>
     </div>

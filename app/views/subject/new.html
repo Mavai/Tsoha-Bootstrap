@@ -13,6 +13,10 @@
 </div>
 {% endif %}
 
+{% if rightserror %}
+<div class="alert, alert-danger">{{rightserror}}</div>
+{% endif %}
+
 <div>
     <form class="form-horizontal" method="post" action="{{base_path}}/aiheet/{{course.id}}/new">
         <div class="form-group">
